@@ -1,13 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <router-view v-if="isRouterAlive"></router-view>
 </template>
 
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script  lang="ts" setup>
+import { ref, nextTick, provide, onMounted } from "vue";
 
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
+// 局部组件刷新
+const isRouterAlive = ref(true);
+const reload = () => {
+  isRouterAlive.value = false;
+  nextTick(() => {
+    isRouterAlive.value = true;
+  });
+};
+provide("reload", reload);
+
 </script>
 
 <style>

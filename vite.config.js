@@ -1,12 +1,16 @@
-import { defineConfig } from 'vite'
+import path from "path";
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import Pages from "vite-plugin-pages"; //基于文件系统的路由(自动配置路由)
+import Layouts from "vite-plugin-vue-layouts"; //页面布局结构(配合上面的使用)
+
+// // 定义方法，获取.env文件里定义的环境变量
+// const envResolve = (mode: string, env: string) => loadEnv(mode, process.cwd())[env];
+// envResolve(mode,'VITE_APP_BASE_URL')
+
 
 // https://vitejs.dev/config/
-<<<<<<< Updated upstream
-export default defineConfig({
-  plugins: [vue()]
-})
-=======
+
 export default ({ mode }) => {
   //参数mode为开放模式或生产模式
   //console.log(mode);  // development or product 
@@ -63,4 +67,4 @@ export default ({ mode }) => {
     },
   })
 }
->>>>>>> Stashed changes
+
