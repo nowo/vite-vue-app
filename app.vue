@@ -1,7 +1,10 @@
 <template>
-    <el-config-provider :locale="locale">
+    <el-config-provider :locale="zhCn">
         <VitePwaManifest />
         <NuxtLayout>
+            <div>
+                <NuxtLink v-for="item in list" :key="item.path" :to="item.path" class="mr20px">{{ item.name }}</NuxtLink>
+            </div>
             <NuxtPage />
         </NuxtLayout>
     </el-config-provider>
@@ -11,20 +14,22 @@
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import en from 'element-plus/dist/locale/en.mjs'
 
-import '~/assets/scss/default.scss'
+// import '~/assets/scss/default.scss'
 
 // import '@unocss/reset/tailwind.css'
 // import '~/assets/scss/app.scss'
 
 // const locale = ref(zhCn)
-const systemInfo = await useSystemState().getSystemInfo()
-console.log('🚀 ~ file: app.vue:22 ~ systemInfo:', systemInfo)
+// const systemInfo = await useSystemState().getSystemInfo()
+// console.log('🚀 ~ file: app.vue:22 ~ systemInfo:', systemInfo)
 
-const { locale: lo } = useI18n()
+// const { locale: lo } = useI18n()
 
-const locale = computed(() => {
-    return lo.value === 'en' ? en : zhCn
-})
+// const locale = computed(() => {
+//     return lo.value === 'en' ? en : zhCn
+// })
+
+const list = useRouter().getRoutes()
 
 if (process.client) console.log(useRouter().getRoutes())
 
@@ -33,18 +38,18 @@ if (process.client) console.log(useRouter().getRoutes())
 
 // console.log('a :>> ', a);
 
-useHead({
-    title: systemInfo.value?.title,
-    meta: [
-        { name: 'description', content: systemInfo.value?.description },
-        { name: 'keywords', content: systemInfo.value?.keyword },
-    ],
-    link: [{ rel: 'icon', href: systemInfo.value?.icon }],
-    // bodyAttrs: {
-    //     class: 'test',
-    // },
-    // script: [{ innerHTML: 'console.log(\'Hello world\')' }],
-})
+// useHead({
+//     title: systemInfo.value?.title,
+//     meta: [
+//         { name: 'description', content: systemInfo.value?.description },
+//         { name: 'keywords', content: systemInfo.value?.keyword },
+//     ],
+//     link: [{ rel: 'icon', href: systemInfo.value?.icon }],
+//     // bodyAttrs: {
+//     //     class: 'test',
+//     // },
+//     // script: [{ innerHTML: 'console.log(\'Hello world\')' }],
+// })
 </script>
 
 <style lang="scss">

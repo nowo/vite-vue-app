@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         '@vueuse/nuxt',
         '@vite-pwa/nuxt',
         '@element-plus/nuxt',
-        '@nuxtjs/i18n',
+        // '@nuxtjs/i18n',
         '@pinia/nuxt',
         'nuxt-swiper',
     ],
@@ -19,7 +19,9 @@ export default defineNuxtConfig({
         inlineSSRStyles: false,
         typedPages: true,
     },
-    css: ['@unocss/reset/tailwind.css', '~/assets/scss/app.scss'],
+    css: ['@unocss/reset/tailwind.css',
+        // '~/assets/scss/app.scss'
+    ],
     colorMode: {
         classSuffix: '',
     },
@@ -102,41 +104,41 @@ export default defineNuxtConfig({
         },
     },
 
-    i18n: {
-        // locale: 'cn',
-        locales: [
-            {
-                code: 'cn',
-                name: '简体中文',
-                file: 'cn.json',
-            },
-            {
-                code: 'en',
-                name: 'English',
-                file: 'en.json',
-            },
+    // i18n: {
+    //     // locale: 'cn',
+    //     locales: [
+    //         {
+    //             code: 'cn',
+    //             name: '简体中文',
+    //             file: 'cn.json',
+    //         },
+    //         {
+    //             code: 'en',
+    //             name: 'English',
+    //             file: 'en.json',
+    //         },
 
-            // {
-            //   code: 'fr',
-            //   file: 'fr-FR.ts'
-            // }
-        ],
-        lazy: true,
-        langDir: 'lang',
-        defaultLocale: 'cn', // default locale of your project for Nuxt pages and routings
-        // strategy: 'prefix_except_default',
-        detectBrowserLanguage: {
-            useCookie: true,
-            cookieKey: 'i18n_redirected',
-            redirectOn: 'root', // recommended
-            // alwaysRedirect: true,
-            // fallbackLocale: 'zh',
-        },
-        // customRoutes: 'page',
-        // pages: {
-        //     login: {
-        //         en: false,
-        //     },
-        // },
-    },
+    //         // {
+    //         //   code: 'fr',
+    //         //   file: 'fr-FR.ts'
+    //         // }
+    //     ],
+    //     lazy: true,
+    //     langDir: 'lang',
+    //     defaultLocale: 'cn', // default locale of your project for Nuxt pages and routings
+    //     // strategy: 'prefix_except_default',
+    //     detectBrowserLanguage: {
+    //         useCookie: true,
+    //         cookieKey: 'i18n_redirected',
+    //         redirectOn: 'root', // recommended
+    //         // alwaysRedirect: true,
+    //         // fallbackLocale: 'zh',
+    //     },
+    //     // customRoutes: 'page',
+    //     // pages: {
+    //     //     login: {
+    //     //         en: false,
+    //     //     },
+    //     // },
+    // },
 })
