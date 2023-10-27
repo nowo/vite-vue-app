@@ -12,8 +12,6 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Unocss from 'unocss/vite'
 
-import 'uno.css'
-
 // import { buildConfig } from './src/utils/build'
 
 const alias: Record<string, string> = {

@@ -39,127 +39,127 @@ declare module 'vue-router' {
  * @description 各字段请查看 `/@/views/system/menu/component/addMenu.vue 下的 ruleForm`
  * @returns 返回路由菜单数据
  */
-// export const dynamicRoutes: Array<RouteRecordRaw> = [
-//     {
-//         path: '/',
-//         name: '/',
-//         component: () => import('/@/layout/index.vue'),
-//         redirect: '/home',
-//         meta: {
-//             isKeepAlive: true,
-//         },
-//         children: [
-//             {
-//                 path: '/home',
-//                 name: 'home',
-//                 component: () => import('/@/views/home/index.vue'),
-//                 meta: {
-//                     title: '首页',
-//                     isLink: '',
-//                     isHide: false,
-//                     isKeepAlive: true,
-//                     isAffix: true,
-//                     isIframe: false,
-//                     roles: ['admin', 'common'],
-//                     icon: 'iconfont icon-shouye',
-//                 },
-//             },
-//             {
-//                 path: '/system',
-//                 name: 'system',
-//                 component: () => import('/@/layout/route/parent.vue'),
-//                 redirect: '/system/menu',
-//                 meta: {
-//                     title: '系统设置',
-//                     isLink: '',
-//                     isHide: false,
-//                     isKeepAlive: true,
-//                     isAffix: false,
-//                     isIframe: false,
-//                     roles: ['admin'],
-//                     icon: 'iconfont icon-xitongshezhi',
-//                 },
-//                 children: [
-//                     {
-//                         path: '/system/menu',
-//                         name: 'systemMenu',
-//                         component: () => import('/@/views/system/menu/index.vue'),
-//                         meta: {
-//                             title: '菜单管理',
-//                             isLink: '',
-//                             isHide: false,
-//                             isKeepAlive: true,
-//                             isAffix: false,
-//                             isIframe: false,
-//                             roles: ['admin'],
-//                             icon: 'iconfont icon-caidan',
-//                         },
-//                     },
-//                     {
-//                         path: '/system/role',
-//                         name: 'systemRole',
-//                         component: () => import('/@/views/system/role/index.vue'),
-//                         meta: {
-//                             title: '角色管理',
-//                             isLink: '',
-//                             isHide: false,
-//                             isKeepAlive: true,
-//                             isAffix: false,
-//                             isIframe: false,
-//                             roles: ['admin'],
-//                             icon: 'ele-ColdDrink',
-//                         },
-//                     },
-//                     {
-//                         path: '/system/user',
-//                         name: 'systemUser',
-//                         component: () => import('/@/views/system/user/index.vue'),
-//                         meta: {
-//                             title: '用户管理',
-//                             isLink: '',
-//                             isHide: false,
-//                             isKeepAlive: true,
-//                             isAffix: false,
-//                             isIframe: false,
-//                             roles: ['admin'],
-//                             icon: 'iconfont icon-icon-',
-//                         },
-//                     },
-//                     {
-//                         path: '/system/dept',
-//                         name: 'systemDept',
-//                         component: () => import('/@/views/system/dept/index.vue'),
-//                         meta: {
-//                             title: '部门管理',
-//                             isLink: '',
-//                             isHide: false,
-//                             isKeepAlive: true,
-//                             isAffix: false,
-//                             isIframe: false,
-//                             roles: ['admin'],
-//                             icon: 'ele-OfficeBuilding',
-//                         },
-//                     },
-//                     {
-//                         path: '/system/dic',
-//                         name: 'systemDic',
-//                         component: () => import('/@/views/system/dic/index.vue'),
-//                         meta: {
-//                             title: '字典管理',
-//                             isLink: '',
-//                             isHide: false,
-//                             isKeepAlive: true,
-//                             isAffix: false,
-//                             isIframe: false,
-//                             roles: ['admin'],
-//                             icon: 'ele-SetUp',
-//                         },
-//                     },
-//                 ],
-//             },
-//         ],
-//     },
-// ]
+export const dynamicRoutes: Array<RouteRecordRaw> = [
+    {
+        path: '/',
+        name: '/',
+        component: () => import('@/layout/index.vue'),
+        redirect: '/home',
+        meta: {
+            isKeepAlive: true,
+        },
+        children: [
+            {
+                path: '/home',
+                name: 'home',
+                component: () => import('@/pages/index.vue'),
+                meta: {
+                    title: '首页',
+                    isLink: '',
+                    isHide: false,
+                    isKeepAlive: true,
+                    isAffix: true,
+                    isIframe: false,
+                    roles: ['admin', 'common'],
+                    icon: 'iconfont icon-shouye',
+                },
+            },
+            // {
+            //     path: '/system',
+            //     name: 'system',
+            //     component: () => import('/@/layout/route/parent.vue'),
+            //     redirect: '/system/menu',
+            //     meta: {
+            //         title: '系统设置',
+            //         isLink: '',
+            //         isHide: false,
+            //         isKeepAlive: true,
+            //         isAffix: false,
+            //         isIframe: false,
+            //         roles: ['admin'],
+            //         icon: 'iconfont icon-xitongshezhi',
+            //     },
+            //     children: [
+            //         {
+            //             path: '/system/menu',
+            //             name: 'systemMenu',
+            //             component: () => import('/@/views/system/menu/index.vue'),
+            //             meta: {
+            //                 title: '菜单管理',
+            //                 isLink: '',
+            //                 isHide: false,
+            //                 isKeepAlive: true,
+            //                 isAffix: false,
+            //                 isIframe: false,
+            //                 roles: ['admin'],
+            //                 icon: 'iconfont icon-caidan',
+            //             },
+            //         },
+            //         {
+            //             path: '/system/role',
+            //             name: 'systemRole',
+            //             component: () => import('/@/views/system/role/index.vue'),
+            //             meta: {
+            //                 title: '角色管理',
+            //                 isLink: '',
+            //                 isHide: false,
+            //                 isKeepAlive: true,
+            //                 isAffix: false,
+            //                 isIframe: false,
+            //                 roles: ['admin'],
+            //                 icon: 'ele-ColdDrink',
+            //             },
+            //         },
+            //         {
+            //             path: '/system/user',
+            //             name: 'systemUser',
+            //             component: () => import('/@/views/system/user/index.vue'),
+            //             meta: {
+            //                 title: '用户管理',
+            //                 isLink: '',
+            //                 isHide: false,
+            //                 isKeepAlive: true,
+            //                 isAffix: false,
+            //                 isIframe: false,
+            //                 roles: ['admin'],
+            //                 icon: 'iconfont icon-icon-',
+            //             },
+            //         },
+            //         {
+            //             path: '/system/dept',
+            //             name: 'systemDept',
+            //             component: () => import('/@/views/system/dept/index.vue'),
+            //             meta: {
+            //                 title: '部门管理',
+            //                 isLink: '',
+            //                 isHide: false,
+            //                 isKeepAlive: true,
+            //                 isAffix: false,
+            //                 isIframe: false,
+            //                 roles: ['admin'],
+            //                 icon: 'ele-OfficeBuilding',
+            //             },
+            //         },
+            //         {
+            //             path: '/system/dic',
+            //             name: 'systemDic',
+            //             component: () => import('/@/views/system/dic/index.vue'),
+            //             meta: {
+            //                 title: '字典管理',
+            //                 isLink: '',
+            //                 isHide: false,
+            //                 isKeepAlive: true,
+            //                 isAffix: false,
+            //                 isIframe: false,
+            //                 roles: ['admin'],
+            //                 icon: 'ele-SetUp',
+            //             },
+            //         },
+            //     ],
+            // },
+        ],
+    },
+]
 
 /**
  * 定义404、401界面
@@ -169,7 +169,7 @@ export const notFoundAndNoPower = [
     {
         path: '/:path(.*)*',
         name: 'notFound',
-        component: () => import('@/views/error/404.vue'),
+        component: () => import('@/pages/error/404.vue'),
         meta: {
             title: '找不到此页面',
             isHide: true,
@@ -178,7 +178,7 @@ export const notFoundAndNoPower = [
     {
         path: '/401',
         name: 'noPower',
-        component: () => import('@/views/error/401.vue'),
+        component: () => import('@/pages/error/401.vue'),
         meta: {
             title: '没有权限',
             isHide: true,
@@ -193,12 +193,12 @@ export const notFoundAndNoPower = [
  * @returns 返回路由菜单数据
  */
 export const staticRoutes: Array<RouteRecordRaw> = [
-    // {
-    //     path: '/login',
-    //     name: 'login',
-    //     component: () => import('@/views/login/index.vue'),
-    //     meta: {
-    //         title: '登录',
-    //     },
-    // },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/pages/login/index.vue'),
+        meta: {
+            title: '登录',
+        },
+    },
 ]
