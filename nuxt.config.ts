@@ -12,11 +12,12 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         'nuxt-swiper',
     ],
+    // ssr: false,
     experimental: {
         // when using generate, payload js assets included in sw precache manifest
         // but missing on offline, disabling extraction it until fixed
-        payloadExtraction: false,
-        inlineSSRStyles: false,
+        // payloadExtraction: false,
+        // inlineSSRStyles: false,
         typedPages: true,
     },
     css: ['@unocss/reset/tailwind.css',
@@ -66,6 +67,9 @@ export default defineNuxtConfig({
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
             ],
         },
+        
+            pageTransition: { name: 'page', mode: 'out-in' }
+          
     },
     // pwa,
     vite: {

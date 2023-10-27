@@ -1,6 +1,6 @@
 <template>
     <div>
-        default
+        经典布局
         <slot />
     </div>
 </template>

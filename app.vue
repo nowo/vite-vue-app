@@ -1,9 +1,12 @@
 <template>
     <el-config-provider :locale="zhCn">
         <VitePwaManifest />
-        <NuxtLayout>
+        <NuxtLayout :name="layoutName">
+            <NuxtLoadingIndicator />
             <div>
-                <NuxtLink v-for="item in list" :key="item.path" :to="item.path" class="mr20px">{{ item.name }}</NuxtLink>
+                <NuxtLink v-for="item in list" :key="item.path" :to="item.path" class="mr20px">
+                    {{ item.name }}
+                </NuxtLink>
             </div>
             <NuxtPage />
         </NuxtLayout>
@@ -12,7 +15,6 @@
 
 <script setup lang="ts">
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
 
 // import '~/assets/scss/default.scss'
 
@@ -28,6 +30,17 @@ import en from 'element-plus/dist/locale/en.mjs'
 // const locale = computed(() => {
 //     return lo.value === 'en' ? en : zhCn
 // })
+
+const route = useRoute()
+
+const { themeConfig } = useThemeState()
+
+// 布局结构设置
+const layoutName = computed(() => {
+    const layout = themeConfig.value.layout
+    const blank = route.name === 'login' ? 'blank' : ''
+    return blank || layout
+})
 
 const list = useRouter().getRoutes()
 
@@ -65,5 +78,15 @@ body,
 html.dark {
     background: #333;
     color: white;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 2s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
 }
 </style>
