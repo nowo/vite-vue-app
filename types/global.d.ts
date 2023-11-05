@@ -12,3 +12,9 @@ declare module 'element-plus/dist/locale/en.mjs';
 // }
 
 // export { }
+
+interface ImportMetaEnv {
+    VITE_APP_TITLE: string
+    // 更多环境变量...
+    VITE_APP_BASEURL: string
+}

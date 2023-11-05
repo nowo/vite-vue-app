@@ -50,9 +50,8 @@ export default antfu(
             // 'brace-style': ['error', '1tbs', { allowSingleLine: true }],
             'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
 
-            // 'jsonc/indent': ['error', 4],
-            // 'style/indent': ['error', 4],
-
+            'jsonc/indent': ['error', 4],
+            'style/indent': ['error', 4],
             // '@typescript-eslint/brace-style': [
             //     'error',
             //     '1tbs',
@@ -109,12 +108,6 @@ export default antfu(
             // 'max-statements-per-line': ['error', { max: 2 }],
             'node/prefer-global/process': ['error', 'always'],
             'function-call-argument-newline': ['error', 'consistent'],
-            'ts/no-use-before-define': ['error', {
-                // functions: true,
-                // classes: true,
-                variables: false,
-                // allowNamedExports: false,
-            }],
+
         },
-    },
-)
+    })
