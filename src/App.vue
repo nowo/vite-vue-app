@@ -1,20 +1,19 @@
 <template>
-  <router-view v-if="isRouterAlive"></router-view>
+    <router-view v-if="isRouterAlive" />
 </template>
 
 <script  lang="ts" setup>
-import { ref, nextTick, provide, onMounted } from "vue";
+import { nextTick, provide, ref } from 'vue'
 
 // 局部组件刷新
-const isRouterAlive = ref(true);
+const isRouterAlive = ref(true)
 const reload = () => {
-  isRouterAlive.value = false;
-  nextTick(() => {
-    isRouterAlive.value = true;
-  });
-};
-provide("reload", reload);
-
+    isRouterAlive.value = false
+    nextTick(() => {
+        isRouterAlive.value = true
+    })
+}
+provide('reload', reload)
 </script>
 
 <style>

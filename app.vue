@@ -3,7 +3,9 @@
         <VitePwaManifest />
         <NuxtLayout>
             <div>
-                <NuxtLink v-for="item in list" :key="item.path" :to="item.path" class="mr20px">{{ item.name }}</NuxtLink>
+                <NuxtLink v-for="item in list" :key="item.path" :to="item.path" class="mr20px">
+                    {{ item.name }}
+                </NuxtLink>
             </div>
             <NuxtPage />
         </NuxtLayout>
@@ -12,7 +14,6 @@
 
 <script setup lang="ts">
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import en from 'element-plus/dist/locale/en.mjs'
 
 // import '~/assets/scss/default.scss'
 
