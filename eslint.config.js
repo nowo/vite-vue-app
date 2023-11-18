@@ -25,6 +25,7 @@ export default antfu(
             'build',
             'index.html',
             'vite.config.ts.timestamp*',
+            'src/router/layout.ts',
         ],
     },
     unocss.configs.flat,
@@ -49,9 +50,8 @@ export default antfu(
             // 'brace-style': ['error', '1tbs', { allowSingleLine: true }],
             'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
 
-            // 'jsonc/indent': ['error', 4],
-            // 'style/indent': ['error', 4],
-
+            'jsonc/indent': ['error', 4],
+            'style/indent': ['error', 4],
             // '@typescript-eslint/brace-style': [
             //     'error',
             //     '1tbs',

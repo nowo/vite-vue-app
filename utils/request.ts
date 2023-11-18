@@ -1,7 +1,6 @@
 import defu from 'defu'
 
-const apiFetch = $fetch.create({ baseURL: "/api" });
-
+const apiFetch = $fetch.create({ baseURL: '/api' })
 
 /**
  * http请求方法封装
@@ -19,16 +18,13 @@ export const useRequest = <T>(...args: Parameters<typeof $fetch>) => {
     if (token.value) { // token追加到请求头
         headers.Authorization = `Bearer ${token.value}`
     }
-    console.log('opts :>> ', opts);
+    console.log('opts :>> ', opts)
 
     // 仅适用 'PUT', 'POST', 'DELETE 和 'PATCH' 请求方法,使用data接收 https://axios-http.com/zh/docs/req_config
     // 先判断是不是为post提交，默认用get
     // const type: 'data' | 'params' = ['post', 'put', 'patch'].includes(config.method as string) ? 'data' : 'params';
     // let data = config[type] ?? {};
     // if (typeof data === 'string') data = JSON.parse(data)
-
-
-
 
     const options: typeof opts = {
         // 设置api主机地址
@@ -48,7 +44,7 @@ export const useRequest = <T>(...args: Parameters<typeof $fetch>) => {
         },
     }
 
-    let data = { a: 100 }
+    const data = { a: 100 }
     // 默认使用get请求，使用query或params
     if (!opts?.method || opts.method.toUpperCase() === 'GET') {
         options.params = data
