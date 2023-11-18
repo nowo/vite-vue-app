@@ -12,4 +12,3 @@ onBeforeMount(() => {
     getApiTest()
 })
 </script>
-

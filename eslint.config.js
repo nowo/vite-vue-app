@@ -110,4 +110,5 @@ export default antfu(
             'function-call-argument-newline': ['error', 'consistent'],
 
         },
-    })
+    },
+)
