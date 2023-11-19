@@ -1,7 +1,5 @@
-import type { RouteRecordRaw } from 'vue-router'
-import { storeToRefs } from 'pinia'
 import { setAddRoute } from '@/router/index'
-import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
+import { dynamicRoutes } from '@/router/route'
 
 // 前端控制路由
 

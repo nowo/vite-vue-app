@@ -11,10 +11,12 @@
 </template>
 
 <script setup lang="ts" name="layoutParentView">
-import { computed, defineAsyncComponent, nextTick, onBeforeMount, onMounted, onUnmounted, reactive, watch } from 'vue'
-import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
+import { computed, nextTick, onMounted, reactive } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { Session } from '@/utils/storage';
+import { Session } from '@/utils/storage'
+
 // import { useKeepALiveNames } from '@/stores/keepAliveNames'
 // import { useThemeConfig } from '@/stores/themeConfig'
 // import { Session } from '@/utils/storage'

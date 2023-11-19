@@ -3,9 +3,8 @@
 </template>
 
 <script setup lang="ts" name="layout">
-import { defineAsyncComponent, onBeforeMount, onUnmounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Local } from '@/utils/storage'
 
 // import mittBus from '@/utils/mitt'
 

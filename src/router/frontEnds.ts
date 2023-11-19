@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { formatFlatteningRoutes, formatTwoStageRoutes, router } from '@/router/index'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
+
 // import pinia from '@/stores/index'
 import { Session } from '@/utils/storage'
 import { useUserInfo } from '@/stores/userInfo'

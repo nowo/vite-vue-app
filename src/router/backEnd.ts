@@ -1,13 +1,11 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { storeToRefs } from 'pinia'
 
 // import pinia from '/@/stores/index'
 // import { useUserInfo } from '@/stores/userInfo'
 // import { useRequestOldRoutes } from '/@/stores/requestOldRoutes'
-import { Session } from '@/utils/storage'
 
 // import { NextLoading } from '/@/utils/loading'
-import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
+import { dynamicRoutes } from '@/router/route'
 import { setAddRoute } from '@/router/index'
 
 // import { useRoutesList } from '/@/stores/routesList'
