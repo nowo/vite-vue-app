@@ -1,8 +1,18 @@
+<!-- 经典布局 -->
 <template>
-    <div>
-        经典布局
-        <slot />
-    </div>
+    <el-container>
+        <LayoutHeader />
+        <el-container>
+            <LayoutAside />
+            <div>
+                <!-- <TagsView v-if="themeConfig.isTagsView" /> -->
+                <LayoutMain>
+                    <slot />
+                </LayoutMain>
+            </div>
+        </el-container>
+
+    </el-container>
 </template>
 
 <script setup lang="ts"></script>
