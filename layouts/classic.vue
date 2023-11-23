@@ -1,17 +1,16 @@
 <!-- 经典布局 -->
 <template>
-    <el-container>
-        <LayoutHeader />
+    <el-container direction="vertical" class="h100%">
+        <LayoutHeader class="bg-#eee" />
         <el-container>
-            <LayoutAside />
-            <div>
-                <!-- <TagsView v-if="themeConfig.isTagsView" /> -->
-                <LayoutMain>
-                    <slot />
-                </LayoutMain>
-            </div>
+            <LayoutAside class="bg-#555" />
+            <!-- <div> -->
+            <!-- <TagsView v-if="themeConfig.isTagsView" /> -->
+            <LayoutMain>
+                <slot />
+            </LayoutMain>
+            <!-- </div> -->
         </el-container>
-
     </el-container>
 </template>
 

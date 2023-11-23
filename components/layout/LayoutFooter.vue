@@ -1,5 +1,5 @@
 <template>
-    <div>底部布局页面</div>
+<el-footer>Footer</el-footer>
 </template>
 
 <script lang="ts" setup>

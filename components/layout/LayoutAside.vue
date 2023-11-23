@@ -1,13 +1,11 @@
 <template>
-    <div class="w100px">
+    <el-aside width="200px">
         侧边栏页面
-
-    </div>
+    </el-aside>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
-
+import { defineComponent } from 'vue'
 </script>
 
 <style lang="scss" scoped>

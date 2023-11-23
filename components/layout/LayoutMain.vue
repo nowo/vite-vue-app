@@ -1,13 +1,13 @@
 <template>
-    <div>
+    <el-main>
+        Main
         main主界面
-        <slot></slot>
-    </div>
+        <slot />
+    </el-main>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
-
+import { defineComponent } from 'vue'
 </script>
 
 <style lang="scss" scoped>

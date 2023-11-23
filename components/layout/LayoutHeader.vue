@@ -1,7 +1,7 @@
 <template>
-    <div class="h50px">
+    <el-header>
         头部
-    </div>
+    </el-header>
 </template>
 
 <script lang="ts" setup>
