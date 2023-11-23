@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         // inlineSSRStyles: false,
         typedPages: true,
     },
-    css: ['@unocss/reset/tailwind.css',
+    css: ['@unocss/reset/tailwind-compat.css',
         // '~/assets/scss/app.scss'
     ],
     colorMode: {
@@ -67,9 +67,9 @@ export default defineNuxtConfig({
                 { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
             ],
         },
-        
-            pageTransition: { name: 'page', mode: 'out-in' }
-          
+
+        pageTransition: { name: 'page', mode: 'out-in' },
+
     },
     // pwa,
     vite: {
@@ -107,7 +107,9 @@ export default defineNuxtConfig({
             secret: process.env.NUXT_AUTH_SECRET, // You can generate one with `openssl rand -base64 32`
         },
     },
-
+    devtools: {
+        enabled: true, // or false to disable
+    },
     // i18n: {
     //     // locale: 'cn',
     //     locales: [
