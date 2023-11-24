@@ -7,7 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-
+definePageMeta({
+    title: '测试页面',
+})
 </script>
 
 <style lang="scss" scoped></style>
