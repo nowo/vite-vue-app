@@ -1,6 +1,6 @@
 <!-- 经典布局 -->
 <template>
-    <el-container direction="vertical" class="h100%">
+    <el-container direction="vertical" class="layout-container h100%">
         <LayoutHeader class="bg-#eee" />
         <el-container>
             <LayoutAside class="bg-#555" />

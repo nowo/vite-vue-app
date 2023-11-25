@@ -1,0 +1,25 @@
+<template>
+    <el-container class="layout-container h100%">
+        <LayoutAside />
+        <el-container>
+            <!-- <LayoutHeader /> -->
+            <el-scrollbar class="w100%">
+                <LayoutHeader />
+                <LayoutMain>
+                    <slot />
+                    <div class="h100vh bg-#eee">
+                        1
+                    </div>
+                </LayoutMain>
+            </el-scrollbar>
+        </el-container>
+        <!-- <el-backtop target=".layout-backtop .el-scrollbar__wrap"></el-backtop> -->
+    </el-container>
+</template>
+
+<script lang="ts" setup>
+import { defineComponent } from 'vue'
+</script>
+
+<style lang="scss" scoped>
+</style>

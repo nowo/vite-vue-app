@@ -52,7 +52,7 @@ export const useThemeState = () => {
         // 是否开启菜单手风琴效果
         isUniqueOpened: true,
         // 是否开启固定 Header
-        isFixedHeader: false,
+        isFixedHeader: true,
         // 初始化变量，用于更新菜单 el-scrollbar 的高度，请勿删除
         isFixedHeaderChange: false,
         // 是否开启经典布局分割菜单（仅经典布局生效）
@@ -114,7 +114,8 @@ export const useThemeState = () => {
          * 中的 `initSetLayoutChange(设置布局切换，重置主题样式)` 方法
          */
         // 布局切换：可选值"<defaults|classic|transverse|columns>"，默认 defaults
-        layout: 'classic',
+        // layout: 'classic',
+        layout: 'basic',
 
         /**
          * 后端控制路由

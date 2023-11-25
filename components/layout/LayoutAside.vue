@@ -1,14 +1,14 @@
 <template>
     <el-aside class="layout-aside" width="auto">
         <!--  width="200px" -->
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px" class="fixed left-0 top-0">
+        <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px" class="left-0 top-0">
             <el-radio-button :label="false">
                 expand
             </el-radio-button>
             <el-radio-button :label="true">
                 collapse
             </el-radio-button>
-        </el-radio-group>
+        </el-radio-group> -->
         <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
             @close="handleClose">
             <el-sub-menu index="1">
@@ -81,7 +81,11 @@ import {
     Setting,
 } from '@element-plus/icons-vue'
 
-const isCollapse = ref(false)
+const { themeConfig, isDrawer } = useThemeState()
+
+const isCollapse = computed(()=>{
+    return themeConfig.value.isCollapse
+})
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
 

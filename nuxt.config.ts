@@ -20,8 +20,9 @@ export default defineNuxtConfig({
         // inlineSSRStyles: false,
         typedPages: true,
     },
-    css: ['@unocss/reset/tailwind-compat.css',
-        // '~/assets/scss/app.scss'
+    css: [
+        '@unocss/reset/tailwind-compat.css',
+        '~/assets/scss/index.scss'
     ],
     colorMode: {
         classSuffix: '',

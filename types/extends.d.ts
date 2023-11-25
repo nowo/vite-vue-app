@@ -3,6 +3,21 @@
  */
 
 import type { PrismaClient } from '@prisma/client'
+import 'vue-router'
+
+import type { GlobalComponents } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
+
+declare global {
+    type ComponentInstance = {
+        [Property in keyof GlobalComponents]: InstanceType<GlobalComponents[Property]>
+    }
+    interface RouteRecordItem extends RouteRecordRaw {
+
+    }
+    type RouteRecordCustom = RouteRecordRaw
+
+}
 
 declare module 'h3' {
     interface H3EventContext {
@@ -22,4 +37,4 @@ declare module '@next-auth/core' {
     }
 }
 
-export {}
+export { }

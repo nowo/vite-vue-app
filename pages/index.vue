@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 definePageMeta({
     // layout: false,
-    // layout: 'default',
+    layout: 'default',
     title: '首页',
 })
 

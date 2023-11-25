@@ -13,6 +13,6 @@ const customRoutes = [
 export default {
     routes: _routes => [
         ..._routes,
-        ...customRoutes,
+        // ...customRoutes,
     ],
 }

@@ -1,6 +1,6 @@
 <!-- 菜单 -->
 <template>
-    <el-menu  router :default-active="$route.path" :collapse="isCollapse" @open="handleOpen"
+    <el-menu router :default-active="$route.path" :collapse="themeConfig.isCollapse" @open="handleOpen"
         @close="handleClose">
         <LayoutMenuSub :children="routes" />
     </el-menu>
@@ -18,6 +18,8 @@ const props = defineProps({
         default: () => [],
     },
 })
+
+const { themeConfig, isDrawer } = useThemeState()
 
 const routes = useRouter().getRoutes()
 console.log(routes)

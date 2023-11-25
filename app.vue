@@ -10,6 +10,7 @@
             </div>
             <NuxtPage />
         </NuxtLayout>
+        <LazyConfigSetting />
     </el-config-provider>
 </template>
 

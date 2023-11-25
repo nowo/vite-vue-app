@@ -2,7 +2,11 @@
  * 布局配置
  */
 declare type GlobalComponentSize = 'large' | 'default' | 'small'
-declare type LayoutConfig = 'default' | 'classic' | 'transverse' | 'columns'
+declare type LayoutConfig = 'default' | 'classic' | 'transverse' | 'columns' | 'basic'
+// declare type LayoutConfig = 'default' | 'classic' | 'transverse' | 'columns' | LayoutKey
+// type GreetParams = Parameters<typeof definePageMeta>
+// declare type LayoutConfig = GreetParams[0]['layout']
+
 declare type LayoutAnimation = 'slide-right' | 'slide-left' | 'opacity'
 declare interface IThemeConfig {
     primary: string
