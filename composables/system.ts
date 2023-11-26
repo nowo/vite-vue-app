@@ -12,3 +12,26 @@ export const useUserState = () => {
         userInfo,
     }
 }
+
+export const usePermissionState = () => {
+    // 菜单列表
+    const menuList = useState<any[]>('menuList', () => [])
+
+    // 处理成平级的菜单列表（方便后续使用）
+    const authRoutes = computed(() => menuList.value)
+
+    /**
+     * 请求路由数据
+     */
+    const getAuthMenu = async () => {
+        const { data } = await useFetch('/api/route')
+        menuList.value = data.value || []
+        return data
+    }
+
+    return {
+        menuList,
+        authRoutes,
+        getAuthMenu,
+    }
+}
