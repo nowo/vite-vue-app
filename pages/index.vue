@@ -9,4 +9,9 @@ definePageMeta({
     title: '首页',
 })
 
+console.log(useRoute())
+
+useHead({
+    title: useRoute().meta.title as string,
+})
 </script>
