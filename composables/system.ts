@@ -3,7 +3,9 @@
  * @returns
  */
 export const useUserState = () => {
-    const token = useState<string>('token', () => '')
+    const token = useState<string>('token', () => {
+        return process.client ? useSessionStorage('token', '') : ''
+    })
 
     const userInfo = useState<any>('userInfo', () => ({}))
 
@@ -24,6 +26,8 @@ export const usePermissionState = () => {
      * 请求路由数据
      */
     const getAuthMenu = async () => {
+        const a = useUserState()
+        if (!a.token.value) return []
         const { data } = await useFetch('/api/route')
         menuList.value = data.value || []
         return data

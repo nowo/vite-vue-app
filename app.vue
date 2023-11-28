@@ -40,6 +40,7 @@ const { themeConfig } = useThemeState()
 const layoutName = computed(() => {
     const layout = themeConfig.value.layout
     const blank = route.name === 'login' ? 'blank' : ''
+    console.log(blank)
     return blank || layout
 })
 

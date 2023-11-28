@@ -70,7 +70,7 @@ definePageMeta({
 const formRef = ref<FormInstance>()
 const userRef = ref<InputInstance>()
 
-const token = useSessionStorage('token', '')
+const { token } = useUserState()
 
 // 定义变量内容
 const route = useRoute()
@@ -171,7 +171,8 @@ const onSignIn = async () => {
     // Session.set('token', res.data.admin_token)
 
     // Session.set('token', 111)
-    token.value = '123456'
+    token.value = '123456000'
+    useSessionStorage('token', token.value)
 
     // 执行完 initFrontEndControlRoutes或者initBackEndControlRoutes，再执行 signInSuccess
     await signInSuccess(false)
