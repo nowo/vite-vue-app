@@ -1,6 +1,6 @@
 <!-- 标签页 -->
 <template>
-    <el-scrollbar>
+    <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
         <ul class="tag-view-ul flex gap-5px p8px">
             <!-- :class="{on:$route.path===v.path}" -->
             <li v-for="item in 50" :key="item" class="tag-view-item">
@@ -11,7 +11,22 @@
 </template>
 
 <script lang="ts" setup>
+import type { ScrollbarInstance } from 'element-plus'
 
+const scrollbarRef = ref<ScrollbarInstance>()
+
+const a = ref<HTMLDivElement>()
+
+// 鼠标滚轮滚动
+const onHandleScroll = (e: WheelEvent) => {
+    // console.log('e :>> ', e)
+    // console.log('scrollbarRef.value :>> ', scrollbarRef.value)
+
+    if (scrollbarRef.value?.$refs.wrapRef) {
+        // scrollbarRef.value.setScrollLeft(e.wheelDelta)
+        (scrollbarRef.value.$refs.wrapRef as HTMLDivElement).scrollLeft += e.wheelDelta / 4
+    }
+}
 </script>
 
 <style lang="scss" scoped>
