@@ -460,9 +460,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
-import { storeToRefs } from 'pinia'
+import { nextTick, onMounted, reactive } from 'vue'
 
 // 定义变量内容
 const { themeConfig, isDrawer } = useThemeState()

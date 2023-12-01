@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
     css: [
         '@unocss/reset/tailwind-compat.css',
-        '~/assets/scss/index.scss'
+        '~/assets/scss/index.scss',
     ],
     colorMode: {
         classSuffix: '',

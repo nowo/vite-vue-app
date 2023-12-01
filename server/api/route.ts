@@ -4,15 +4,15 @@ export default defineEventHandler(async (event) => {
             path: '/',
             meta: {
                 title: '首页',
-                icon: 'i-ep-home-filled'
-            }
+                icon: 'i-ep-home-filled',
+            },
         },
         {
             path: '/system',
             meta: {
                 title: '系统设置',
-                icon: 'i-ep-setting'
-            }
+                icon: 'i-ep-setting',
+            },
         },
     ]
 })

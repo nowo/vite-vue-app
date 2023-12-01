@@ -1,9 +1,8 @@
 <template>
-<el-footer>Footer</el-footer>
+    <el-footer>Footer</el-footer>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 
 </script>
 

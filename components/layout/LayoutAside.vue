@@ -73,7 +73,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import {
     Document,
     Menu as IconMenu,
@@ -83,7 +82,7 @@ import {
 
 const { themeConfig, isDrawer } = useThemeState()
 
-const isCollapse = computed(()=>{
+const isCollapse = computed(() => {
     return themeConfig.value.isCollapse
 })
 const handleOpen = (key: string, keyPath: string[]) => {

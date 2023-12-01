@@ -20,7 +20,7 @@ specifiers:
   '@unocss/eslint-config': ^0.57.7
   '@unocss/nuxt': ^0.57.7
   '@unocss/preset-rem-to-px': ^0.57.7
-  '@vite-pwa/nuxt': ^0.2.3
+  '@vite-pwa/nuxt': ^0.3.2
   '@vueuse/nuxt': ^10.6.1
   changelogen: ^0.5.5
   commitizen: ^4.3.0
@@ -68,7 +68,7 @@ devDependencies:
   '@unocss/eslint-config': 0.57.7_t4y562kuozn2x6kqiutrjmhi5a
   '@unocss/nuxt': 0.57.7
   '@unocss/preset-rem-to-px': 0.57.7
-  '@vite-pwa/nuxt': 0.2.3
+  '@vite-pwa/nuxt': 0.3.2
   '@vueuse/nuxt': 10.6.1_nuxt@3.8.2
   changelogen: 0.5.5
   commitizen: 4.3.0_typescript@5.3.2
@@ -4222,8 +4222,8 @@ packages:
       - supports-color
     dev: true
 
-  /@vite-pwa/nuxt/0.2.3:
-    resolution: {integrity: sha512-dAf7crzDth3/hXQ/JAcO0vh9alFl6gUZ3Sw2so1wL4W4VZOMYIA8D3sMo5AH8zV+loUlkqsb6kutmz8IKdpjmQ==}
+  /@vite-pwa/nuxt/0.3.2:
+    resolution: {integrity: sha512-VqYSaQvNMQx26Z/2L32gWIT5aJIkJw+Dot/ttqsmHMUv3CnbKBv+o1x5XFC24Zk1as5XKDocwyS2LF8+mhN8Hg==}
     dependencies:
       '@nuxt/kit': 3.8.2
       pathe: 1.1.1

@@ -25,8 +25,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
-
 const { themeConfig, isDrawer } = useThemeState()
 
 const isShowBreadcrumb = ref(true)

@@ -24,7 +24,7 @@ const onHandleScroll = (e: WheelEvent) => {
 
     if (scrollbarRef.value?.$refs.wrapRef) {
         // scrollbarRef.value.setScrollLeft(e.wheelDelta)
-        (scrollbarRef.value.$refs.wrapRef as HTMLDivElement).scrollLeft += e.wheelDelta / 4
+        (scrollbarRef.value.$refs.wrapRef as HTMLDivElement).scrollLeft += e.deltaY / 4
     }
 }
 </script>
