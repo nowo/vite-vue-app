@@ -60,12 +60,12 @@ export default antfu(
             //     // }
             // ],
             // '@typescript-eslint/indent': 'off',
-            // '@typescript-eslint/no-use-before-define': [
-            //     'error',
-            //     {
-            //         variables: false,
-            //     },
-            // ],
+            'ts/no-use-before-define': [
+                'error',
+                {
+                    variables: false,
+                },
+            ],
             'antfu/if-newline': 'off', // 允许if(a==1) return 1  这种单行的格式
             'antfu/top-level-function': 'off',
             // 'vue/component-tags-order': [

@@ -5,7 +5,7 @@
 import type { PrismaClient } from '@prisma/client'
 import 'vue-router'
 
-import type { GlobalComponents } from 'vue'
+import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
 
 declare global {
