@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     if (menuList.value.length) { // 有用户路由时
         const currentItem = menuList.value.find(item => item.path === to.path)
-        console.log(currentItem)
+        // console.log(currentItem)
         // if (!currentItem) return abortNavigation('无权访问')  // 阻止跳转
 
         if (currentItem) {

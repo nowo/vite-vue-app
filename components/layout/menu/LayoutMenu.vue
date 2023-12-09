@@ -22,7 +22,7 @@ const props = defineProps({
 const { themeConfig, isDrawer } = useThemeState()
 
 const routes = useRouter().getRoutes()
-console.log(routes)
+// console.log(routes)
 
 const isCollapse = ref(false)
 const handleOpen = (key: string, keyPath: string[]) => {

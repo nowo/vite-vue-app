@@ -5,6 +5,9 @@
         <el-button @click="onLogout">
             clear
         </el-button>
+        <div>
+            <CoUpload v-model="list" char="|" :limit="9" />
+        </div>
     </div>
 </template>
 
@@ -15,7 +18,15 @@ definePageMeta({
     title: '首页',
 })
 
-console.log(useRoute())
+if (process.client) console.log(useRoute())
+
+const list = ref([
+    'https://img.goyojo.com/20231208/202312081441371472.png?x-oss-process=image/quality,Q_50',
+    'https://img.goyojo.com/20231208/202312081441371472.png?x-oss-process=image/quality,Q_50',
+    'http://oss.lyecs.com/img/gallery/202304/1681543152itOKOK3dmbqAidvxtr!!pic200x200.jpeg',
+    'https://img.goyojo.com/20231208/202312081441371472.png?x-oss-process=image/quality,Q_50',
+    'https://alfred-skyblue.github.io/vue-draggable-plus/logo.svg'
+])
 
 useHead({
     title: useRoute().meta.title as string,
