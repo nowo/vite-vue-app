@@ -26,6 +26,7 @@
         "jsonwebtoken": "^9.0.2",
         "nuxt-swiper": "^1.2.2",
         "release-it": "^17.0.0",
+        "vue-draggable-plus": "^0.3.0",
         "ws": "^8.14.2"
     },
     "devDependencies": {

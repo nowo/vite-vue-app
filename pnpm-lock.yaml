@@ -38,6 +38,7 @@ specifiers:
   release-it: ^17.0.0
   sass: ^1.69.5
   typescript: ^5.3.2
+  vue-draggable-plus: ^0.3.0
   ws: ^8.14.2
 
 dependencies:
@@ -48,6 +49,7 @@ dependencies:
   jsonwebtoken: 9.0.2
   nuxt-swiper: 1.2.2
   release-it: 17.0.0_typescript@5.3.2
+  vue-draggable-plus: 0.3.0
   ws: 8.14.2
 
 devDependencies:
@@ -11849,6 +11851,16 @@ packages:
   /vue-devtools-stub/0.1.0:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
     dev: true
+
+  /vue-draggable-plus/0.3.0:
+    resolution: {integrity: sha512-yMmP1LcSOsOI43wfm6x/YkFbmUqUqwULAqEXzINACOstuu2ICUB4aFHCwNfUCok34ZslTvcMckPP5OjbqwYCxA==}
+    peerDependencies:
+      '@types/sortablejs': ^1.15.0
+      '@vue/composition-api': '*'
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dev: false
 
   /vue-eslint-parser/9.3.2_eslint@8.54.0:
     resolution: {integrity: sha512-q7tWyCVaV9f8iQyIA5Mkj/S6AoJ9KBN8IeUSf3XEmBrOtxOZnfTg5s4KClbZBCK3GtnT/+RyCLZyDHuZwTuBjg==}
