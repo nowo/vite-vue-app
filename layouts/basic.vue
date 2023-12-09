@@ -7,9 +7,6 @@
                 <LayoutHeader />
                 <LayoutMain>
                     <slot />
-                    <div class="h100vh bg-#eee">
-                        1
-                    </div>
                 </LayoutMain>
             </el-scrollbar>
         </el-container>

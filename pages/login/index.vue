@@ -171,6 +171,9 @@ const onSignIn = async () => {
     // Session.set('token', res.data.admin_token)
 
     // Session.set('token', 111)
+
+    const res = await useFetch('/api/login')
+
     token.value = '123456000'
     useSessionStorage('token', token.value)
 

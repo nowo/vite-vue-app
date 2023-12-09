@@ -3,11 +3,17 @@
  * @returns
  */
 export const useUserState = () => {
-    const token = useState<string>('token', () => {
-        return process.client ? useSessionStorage('token', '') : ''
-    })
+    // const token = useState<string>('token', () => {
+    //     return process.client ? useSessionStorage('token', '') : ''
+    // })
+    const token = useCookie('token')
 
     const userInfo = useState<any>('userInfo', () => ({}))
+
+    const setToken = (token: string) => {
+        useSessionStorage('token', token)
+        userInfo.value = {}
+    }
 
     return {
         token,
