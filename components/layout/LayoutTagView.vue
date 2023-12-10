@@ -1,21 +1,26 @@
 <!-- 标签页 -->
 <template>
     <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
-        <ul class="tag-view-ul flex gap-5px p8px">
+        <VueDraggable v-model="list" tag="ul" class="tag-view-ul flex gap-5px p8px" @end="onEnd">
+            <!-- <ul class="tag-view-ul flex gap-5px p8px"> -->
             <!-- :class="{on:$route.path===v.path}" -->
-            <li v-for="item in 50" :key="item" class="tag-view-item">
+            <li v-for="item in list" :key="item" class="tag-view-item">
                 {{ item }}
             </li>
-        </ul>
+            <!-- </ul> -->
+        </VueDraggable>
     </el-scrollbar>
 </template>
 
 <script lang="ts" setup>
+import { type UseDraggableReturn, VueDraggable } from 'vue-draggable-plus'
 import type { ScrollbarInstance } from 'element-plus'
 
 const scrollbarRef = ref<ScrollbarInstance>()
 
 const a = ref<HTMLDivElement>()
+
+const list = ref<number[]>([])
 
 // 鼠标滚轮滚动
 const onHandleScroll = (e: WheelEvent) => {
@@ -27,6 +32,17 @@ const onHandleScroll = (e: WheelEvent) => {
         (scrollbarRef.value.$refs.wrapRef as HTMLDivElement).scrollLeft += e.deltaY / 4
     }
 }
+
+// 拖拽结束事件
+const onEnd = (e: any) => {
+    console.log('e :>> ', e)
+}
+
+onBeforeMount(() => {
+    for (let i = 0; i < 50; i++) {
+        list.value.push(i)
+    }
+})
 </script>
 
 <style lang="scss" scoped>
