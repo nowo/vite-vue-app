@@ -2,25 +2,27 @@
     <div>
         图片上传
         <VueDraggable ref="dragRef" v-model="uploadList" tag="ul" class="upload-list" handle=".upload-list-chose-icon-drag">
-            <li v-for="item in uploadList" :key="item" class="upload-list-item">
+            <li v-for="(item, index) in uploadList" :key="item" class="upload-list-item">
                 <el-image :src="item" class="upload-list-item-image" />
                 <div class="upload-list-item-view">
-                    <i v-if="uploadList.length > 1" class="i-ep-more-filled upload-list-chose-icon upload-list-chose-icon-drag" />
+                    <i v-if="uploadList.length > 1"
+                        class="upload-list-chose-icon upload-list-chose-icon-drag i-ep-more-filled" />
 
                     <!-- <i v-if="uploadList.length > 1" class="i-ep-rank upload-list-chose-icon upload-list-chose-icon-drag" /> -->
                     <!-- <i v-if="uploadList.length > 1" class="i-ep-position upload-list-chose-icon upload-list-chose-icon-drag" /> -->
                     <!-- <i v-if="uploadList.length > 1" class="i-ep-connection upload-list-chose-icon upload-list-chose-icon-drag" /> -->
 
-                    <i class="i-ep-zoom-in upload-list-chose-icon" />
-                    <i class="i-ep-delete upload-list-chose-icon" />
+                    <i class="upload-list-chose-icon i-ep-zoom-in" @click="openImageView(index)" />
+                    <i class="upload-list-chose-icon i-ep-delete" @click="onImageRemove(index)" />
                 </div>
             </li>
             <li v-if="props.limit > uploadList?.length" class="upload-list-item upload-list-chose" @click="openChoseDialog">
-                <i class="i-ep-plus upload-list-chose-icon" />
+                <i class="upload-list-chose-icon i-ep-plus" />
             </li>
         </VueDraggable>
-        <!-- <el-image-viewer v-if="showImg.viewer" :url-list="uploadList" :z-index="10000" :initial-index="showImg.index"
-            teleported @close="closeView" /> -->
+        <el-image-viewer v-if="defData.showImg.viewer" :url-list="uploadList" :z-index="10000"
+            :initial-index="defData.showImg.index" teleported @close="closeView" />
+            
     </div>
 </template>
 
@@ -49,6 +51,12 @@ const emits = defineEmits<{
 }>()
 
 const dragRef = ref<UseDraggableReturn>()
+const defData = reactive({
+    showImg: {
+        viewer: false,
+        index: 0,
+    },
+})
 
 const uploadList = computed({
     get() {
@@ -74,11 +82,26 @@ const styles = computed(() => {
 const openChoseDialog = () => {
 
 }
+
+// 打开图片预览
+const openImageView = (index: number) => {
+    defData.showImg.index = index
+    defData.showImg.viewer = true
+}
+// 关闭图片预览
+const closeView = () => {
+    defData.showImg.viewer = false
+}
+
+// 移除图片
+const onImageRemove = (index: number) => {
+    uploadList.value.splice(index, 1)
+}
 </script>
 
 <style lang="scss" scoped>
 .upload-list {
-    --co-upload-image-width: 80px;
+    --co-upload-image-width: 100px;
     --co-upload-item-margin: v-bind('styles.margin');
     --co-upload-icon-size: 24px;
     display: flex;
