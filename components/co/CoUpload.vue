@@ -1,6 +1,5 @@
 <template>
     <div>
-        图片上传
         <VueDraggable ref="dragRef" v-model="uploadList" tag="ul" class="upload-list" handle=".upload-list-chose-icon-drag">
             <li v-for="(item, index) in uploadList" :key="item" class="upload-list-item">
                 <el-image :src="item" class="upload-list-item-image" />
@@ -40,10 +39,6 @@ const props = defineProps({
             return val > 0
         },
     },
-    char: { // 字符串分隔符
-        type: String,
-        default: ',',
-    },
 })
 
 const emits = defineEmits<{
@@ -68,7 +63,7 @@ const uploadList = computed({
         }
     },
     set(value) {
-        const val = Array.isArray(props.modelValue) ? value : props.modelValue || ''
+        const val = Array.isArray(props.modelValue) ? value : value[0] || ''
         emits('update:modelValue', val)
     },
 })
