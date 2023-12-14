@@ -6,7 +6,7 @@
                 <el-table-column v-for="(item, index) in headerList" :key="index" show-overflow-tooltip
                     v-bind="setColumnAttrs(item)">
                     <template v-if="item.slotHeader" #header="scope">
-                        <slot :name="`${item.property}Header`" :scopes="scope" />
+                        <slot :name="setSlotHeaderName(item)" :scopes="scope" />
                     </template>
                     <!-- 这里根据slot字段来判断是否使用插槽 -->
                     <template v-if="item.type !== 'selection' && item.type !== 'index'" #default="scope">
@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup  generic="T">
 import type { PropType } from 'vue'
 import { computed, nextTick, reactive, ref } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
@@ -45,29 +45,27 @@ import { useElementBounding, useElementSize } from '@vueuse/core'
 
 import { wait } from '@/utils/common'
 
-// import { deepClone } from '@/utils/other'
+type CoTablePropsType = CoTableType<T>
+type TableHeaderType = CoTablePropsType['tableHeader'][0]
 
-// type PropsDataType={
-//     data:CoTableType["data"],
-//     tableHeader:CoTableType["tableHeader"] | typeof ElTableColumn[],
-//     page:CoTableType["pagination"],
-//     hide?:boolean
-// }
-
-// const props=defineProps<PropsDataType>()
-type CoTableType = any
+interface CoTableColumnScopes {
+    row: T
+    column: TableColumnCtx<T>
+    $index: number
+    cellIndex: number
+}
 
 const props = defineProps({
     data: {
-        type: Array as PropType<CoTableType['data']>,
+        type: Array as PropType<CoTablePropsType['data']>,
         default: () => [],
     },
     tableHeader: {
-        type: Array as PropType<CoTableType['tableHeader'] | TableHeaderType[]>,
+        type: Array as PropType<CoTablePropsType['tableHeader']>,
         required: true,
     },
     page: {
-        type: Object as PropType<CoTableType['pagination']>,
+        type: Object as PropType<CoTablePropsType['pagination']>,
         required: true,
     },
     hide: {
@@ -81,21 +79,23 @@ const props = defineProps({
 })
 
 const emits = defineEmits<{
-    (e: 'update:page', param: Pagination): void
-    (e: 'update:table-header', param: TableHeaderType[]): void
+    (e: 'update:page', param: CoTablePropsType['pagination']): void
+    (e: 'update:table-header', param: CoTablePropsType['tableHeader']): void
 }>()
 
 // const slots = defineSlots<{
-//     str(props: { scopes: CoTableType['data'][0] }): any
-// }>()
+//     // str(props: { scopes: T }): any
+//     [K in keyof TableHeaderType['property']]:(props: { scopes: T })=>any
+// } & Record<CoTableColumnProperty<T>, (props: { scopes: CoTableColumnScopes }) => any>>()
+
+defineSlots<{
+    // [K in CoTableColumnProperty<T>]: (props: {
+    //     scopes: CoTableColumnScopes
+    // }) => any;
+    [K in CoTableColumnProperty<T>]?: (props: { scopes: CoTableColumnScopes }) => void;
+}>()
 
 const { themeConfig } = useThemeState()
-
-// 分页
-type Pagination = CoTableType['pagination']
-
-type TableHeaderType = CoTableType['tableHeader'][0] & TableColumnCtx<any>
-// interface  TableHeaderType
 
 const tableRef = ref<TableInstance>()
 
@@ -142,6 +142,10 @@ const setColumnAttrs = (item: TableHeaderType): any => {
     return attr
 }
 
+const setSlotHeaderName = (row: TableHeaderType) => {
+    return `${String(row.property)}Header` as CoTableColumnProperty<T>
+}
+
 // 分页点击
 const onHandleCurrentChange = (val: number) => {
     const { total, page_size } = defData.pagination
@@ -164,13 +168,13 @@ const onHandleSizeChange = async (val: number) => {
     tableRef.value?.setScrollTop(0)
 }
 
-const headerList = computed(() => props.tableHeader as TableHeaderType[])
+const headerList = computed(() => props.tableHeader)
 // const setHeader = ref(props.tableHeader)
 // // 设置 tool header 数据
 // const setHeader = computed(() => {
 //     return props.header.filter(v => v.isCheck)
 // })
-const moveRef = ref<HTMLDivElement>()
+// const moveRef = ref<HTMLDivElement>()
 // 设置
 // const onSetTable = () => {
 //     nextTick(() => {
@@ -179,7 +183,7 @@ const moveRef = ref<HTMLDivElement>()
 //             dataIdAttr: 'data-key',
 //             animation: 150,
 //             onEnd: () => {
-//                 const tableHead = props.tableHeader as TableHeaderType[]
+//                 const tableHead = props.tableHeader
 //                 // ;
 //                 const headerList: TableHeaderType[] = []
 //                 sortable.toArray().forEach((val: string) => {

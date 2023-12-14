@@ -7,6 +7,7 @@ import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
+import type { TableColumnCtx, TableInstance } from 'element-plus'
 
 declare global {
     type ComponentInstance = {
@@ -16,6 +17,8 @@ declare global {
 
     }
     type RouteRecordCustom = RouteRecordRaw
+
+    type CoTableColumnCtx<T> = Partial<TableColumnCtx<T>>
 
 }
 
