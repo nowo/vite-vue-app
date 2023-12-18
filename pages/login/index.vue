@@ -1,53 +1,56 @@
 <template>
-    <el-form ref="formRef" :model="form" :rules="rules" size="large" class="login-content-form">
-        <el-form-item prop="username" class="login-animation1">
-            <el-input ref="userRef" v-model.trim="form.username" placeholder="请输入账号" clearable autocomplete="off"
-                maxlength="20" @keyup.enter="onSignIn">
-                <template #prefix>
-                    <el-icon class="el-input__icon">
-                        <!-- <ele-User /> -->
-                        <i class="i-ep-user" />
-                    </el-icon>
-                </template>
-            </el-input>
-        </el-form-item>
-        <el-form-item prop="password" class="login-animation2">
-            <el-input v-model.trim="form.password" type="password" show-password placeholder="请输入密码" autocomplete="off"
-                maxlength="20" @keyup.enter="onSignIn">
-                <template #prefix>
-                    <el-icon class="el-input__icon">
-                        <!-- <ele-Unlock /> -->
-                        <i class="i-ep-unlock" />
-                    </el-icon>
-                </template>
-            </el-input>
-        </el-form-item>
-        <el-form-item prop="code" class="login-animation3">
-            <el-col :span="15">
-                <el-input v-model.trim="form.code" maxlength="4" placeholder="请输入验证码" clearable autocomplete="off"
-                    @keyup.enter="onSignIn">
+    <div class="h100vh w100% flex items-center justify-center">
+        <el-form ref="formRef" :model="form" :rules="rules" size="large" class="login-content-form">
+            <el-form-item prop="username" class="login-animation1">
+                <el-input ref="userRef" v-model.trim="form.username" placeholder="请输入账号" clearable autocomplete="off"
+                    maxlength="20" @keyup.enter="onSignIn">
                     <template #prefix>
                         <el-icon class="el-input__icon">
-                            <!-- <ele-Position /> -->
-                            <i class="i-ep-position" />
+                            <!-- <ele-User /> -->
+                            <i class="i-ep-user" />
                         </el-icon>
                     </template>
                 </el-input>
-            </el-col>
-            <el-col :span="1" />
-            <el-col :span="8">
-                <el-button class="login-content-code" @click="getCode">
-                    {{ state.verify }}
+            </el-form-item>
+            <el-form-item prop="password" class="login-animation2">
+                <el-input v-model.trim="form.password" type="password" show-password placeholder="请输入密码" autocomplete="off"
+                    maxlength="20" @keyup.enter="onSignIn">
+                    <template #prefix>
+                        <el-icon class="el-input__icon">
+                            <!-- <ele-Unlock /> -->
+                            <i class="i-ep-unlock" />
+                        </el-icon>
+                    </template>
+                </el-input>
+            </el-form-item>
+            <el-form-item prop="code" class="login-animation3">
+                <el-col :span="15">
+                    <el-input v-model.trim="form.code" maxlength="4" placeholder="请输入验证码" clearable autocomplete="off"
+                        @keyup.enter="onSignIn">
+                        <template #prefix>
+                            <el-icon class="el-input__icon">
+                                <!-- <ele-Position /> -->
+                                <i class="i-ep-position" />
+                            </el-icon>
+                        </template>
+                    </el-input>
+                </el-col>
+                <el-col :span="1" />
+                <el-col :span="8">
+                    <el-button class="login-content-code" @click="getCode">
+                        {{ state.verify }}
+                    </el-button>
+                </el-col>
+            </el-form-item>
+            <el-form-item class="login-animation4">
+                <!-- v-waves -->
+                <el-button type="primary" class="login-content-submit" round :loading="state.loading.signIn"
+                    @click="onSignIn">
+                    <span>登 录</span>
                 </el-button>
-            </el-col>
-        </el-form-item>
-        <el-form-item class="login-animation4">
-            <!-- v-waves -->
-            <el-button type="primary" class="login-content-submit" round :loading="state.loading.signIn" @click="onSignIn">
-                <span>登 录</span>
-            </el-button>
-        </el-form-item>
-    </el-form>
+            </el-form-item>
+        </el-form>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -201,7 +204,8 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .login-content-form {
-    margin-top: 20px;
+    // margin-top: 20px;
+    width: 400px;
 
     // @for $i from 1 through 4 {
     //     .login-animation#{$i} {

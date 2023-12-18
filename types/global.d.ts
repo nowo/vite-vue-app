@@ -19,15 +19,17 @@ interface ImportMetaEnv {
     VITE_APP_BASEURL: string
 }
 
-type CoTableColumnProperty<T> = keyof T | `${keyof T}Header` | 'operate' | 'operateHeader' | ''
+// type CoTableColumnProperty<T> = keyof T | `${keyof T}Header` | 'operate' | 'operateHeader' | ''
 
 interface CoTableHeader<T> extends CoTableColumnCtx<T> {
-    // property: keyof T | 'operate'
-    property: CoTableColumnProperty<T>
+    property: keyof T | 'operate' | ''
+    // property: CoTableColumnProperty<T>
     label: string
     slot?: boolean
     slotHeader?: boolean
 }
+
+type CoTableColumnProperty<T> = CoTableHeader<T>['property'] | `${keyof T}Header` | 'operateHeader'
 
 // table 数据格式公共类型
 declare interface CoTableType<T = object> {
