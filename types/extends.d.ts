@@ -29,15 +29,15 @@ declare module 'h3' {
     }
 }
 
-declare module '@next-auth/core' {
-    interface Session {
-        user?: User
-        token?: string
-    }
-    interface User {
-        id: number
-        username: string
-    }
-}
+// declare module '@next-auth/core' {
+//     interface Session {
+//         user?: User
+//         token?: string
+//     }
+//     interface User {
+//         id: number
+//         username: string
+//     }
+// }
 
 export { }

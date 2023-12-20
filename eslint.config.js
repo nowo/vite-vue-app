@@ -3,6 +3,8 @@ import unocss from '@unocss/eslint-plugin'
 
 export default antfu(
     {
+        // unocss: true,
+        // formatters: true,
         stylistic: {
             indent: 4, // 4, or 'tab'
             quotes: 'single', // or 'double'
