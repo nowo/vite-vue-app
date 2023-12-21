@@ -2,6 +2,7 @@
 export default defineNuxtPlugin(() => {
     // const router = useRouter()
 
+    // alias
     // let routes = []
     // router.beforeEach(async (to, _from, next) => {
     //     const pageType = await getPageType(to.path) // api call

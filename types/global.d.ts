@@ -19,6 +19,18 @@ interface ImportMetaEnv {
     VITE_APP_BASEURL: string
 }
 
+// search搜索项 数据格式公共类型
+declare interface SearchDataType<T = any, U = any> {
+    data: T
+    // config: {
+    //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
+    // },
+    config: { column: { label: string, prop: keyof T, [key: string]: any }, slot?: boolean, placeholder?: string, width?: string }[]
+    // searchFunc?: () => void,     // 查询方法
+    hideBtn?: boolean
+    showAll?: boolean
+}
+
 // type CoTableColumnProperty<T> = keyof T | `${keyof T}Header` | 'operate' | 'operateHeader' | ''
 
 interface CoTableHeader<T> extends CoTableColumnCtx<T> {
