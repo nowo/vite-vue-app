@@ -1,13 +1,14 @@
 <template>
-    <el-form v-if="searchData.config.length" ref="formRef" v-bind="$attrs" :model="searchData.data">
+    <el-form v-if="data.config.length" ref="formRef" v-bind="$attrs" :model="data">
         <!-- :ref="setItemRef" -->
         <!-- :ref="(el: FormItemInstance | any) => { if (el) formItemRef[index] = el }" -->
-        <el-form-item v-for="(item, index) in searchData.config" :key="index" ref="formItemRef"
-            :class="setFormItemClass(index)" v-bind="item.column" :prop="setFormPropName(item.column.prop as string)">
+        <el-form-item v-for="(item, index) in data.config" :key="index" ref="formItemRef" :class="setFormItemClass(index)"
+            v-bind="item.column" :prop="setFormPropName(item.column.prop as string)">
             <div class="item-content" :style="{ width: setElWidth(item.width) }">
-                <slot v-if="item.slot" :name="item.column.prop" :row="searchData.data" :width="setElWidth(item.width)" />
-                <el-input v-else v-model.trim="searchData.data[item.column.prop]" :style="{ width: setElWidth(item.width) }"
-                    :placeholder="item.placeholder" clearable @keyup.enter="onSearch" />
+                <slot v-if="item.slot" :name="item.column.prop" :row="data.data" :width="setElWidth(item.width)" />
+                <el-input v-else v-model.trim="data.data[item.column.prop]"
+                    :style="{ width: setElWidth(item.width) }" :placeholder="item.placeholder" clearable
+                    @keyup.enter="onSearch" />
             </div>
         </el-form-item>
         <el-form-item ref="lastItemRef" label="">
@@ -36,19 +37,35 @@
     </el-form>
 </template>
 
-<script lang="ts" setup generic="T">
+<script lang="ts" setup generic="T=Record<string, any>">
 import type { FormInstance, FormItemInstance } from 'element-plus'
 
-const props = defineProps({
-    data: {
-        type: Object as PropType<SearchDataType>,
-        required: true,
-    },
-})
+// const props = defineProps({
+//     data: {
+//         type: Object as PropType<SearchDataType<T>>,
+//         required: true,
+//     },
+// })
+
+const props = defineProps<{
+    data: SearchDataType<T>
+}>()
+
 const emits = defineEmits<{
     (event: 'search'): void
     (event: 'reset'): void
 }>()
+
+defineSlots<{
+    // [K in CoTableColumnProperty<T>]: (props: {
+    //     scopes: CoTableColumnScopes
+    // }) => any;
+    // default: any;
+    [K in keyof T]?: (props: { row: T }) => void;
+} extends {
+    default?: any;
+}>()
+
 const formRef = ref<FormInstance>()
 const formItemRef = ref<FormItemInstance[]>([])
 const lastItemRef = ref<FormItemInstance>()
@@ -59,7 +76,10 @@ const defData = reactive({
     hideIndex: -1,
 })
 
-const searchData = ref(props.data)
+// const searchData = ref(props.data)
+// const searchData = reactive({
+//     ...props.data
+// })
 
 // const searchData = reactive({
 //     data: props.data.data,
