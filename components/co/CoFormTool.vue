@@ -1,43 +1,42 @@
 <template>
-    <el-form v-if="data.config.length" ref="formRef" v-bind="$attrs" :model="data">
+    <el-form v-if="searchData.config.length" ref="formRef" v-bind="$attrs" :model="searchData.data">
         <!-- :ref="setItemRef" -->
         <!-- :ref="(el: FormItemInstance | any) => { if (el) formItemRef[index] = el }" -->
-        <el-form-item v-for="(item, index) in data.config" :key="index" ref="formItemRef" :class="setFormItemClass(index)"
-            v-bind="item.column" :prop="setFormPropName(item.column.prop as string)">
+        <el-form-item v-for="(item, index) in searchData.config" :key="index" ref="formItemRef"
+            :class="setFormItemClass(index)" v-bind="item.column" :prop="setFormPropName(item.column.prop as string)">
             <div class="item-content" :style="{ width: setElWidth(item.width) }">
-                <slot v-if="item.slot" :name="item.column.prop" :row="data.data" :width="setElWidth(item.width)" />
-                <el-input v-else v-model.trim="data.data[item.column.prop]"
-                    :style="{ width: setElWidth(item.width) }" :placeholder="item.placeholder" clearable
+                <slot v-if="item.slot" :name="item.column.prop" :row="searchData.data" />
+                <el-input v-else v-model.trim="searchData.data[item.column.prop]" :placeholder="item.placeholder" clearable
                     @keyup.enter="onSearch" />
             </div>
         </el-form-item>
         <el-form-item ref="lastItemRef" label="">
             <el-button type="primary" @click="onSearch">
                 <el-icon>
-                    <ele-Search />
+                    <i class="i-ep-search" />
                 </el-icon>
                 查询
             </el-button>
             <el-button @click="onReset">
                 <el-icon>
-                    <ele-Refresh />
+                    <i class="i-ep-refresh" />
                 </el-icon>
                 重置
             </el-button>
             <slot />
-            <el-button v-if="!props.data.hideBtn" type="primary" link @click="onToggle">
-                <template v-if="defData.showAll">
-                    收起<el-icon><ele-ArrowUp /></el-icon>
+            <el-button v-if="!searchData.hideBtn" type="primary" link @click="onToggle">
+                <template v-if="searchData.showAll">
+                    收起<el-icon><i class="i-ep-arrow-up" /></el-icon>
                 </template>
                 <template v-else>
-                    展开<el-icon><ele-ArrowDown /></el-icon>
+                    展开<el-icon><i class="i-ep-arrow-down" /></el-icon>
                 </template>
             </el-button>
         </el-form-item>
     </el-form>
 </template>
 
-<script lang="ts" setup generic="T=Record<string, any>">
+<script lang="ts" setup generic="T">
 import type { FormInstance, FormItemInstance } from 'element-plus'
 
 // const props = defineProps({
@@ -56,15 +55,7 @@ const emits = defineEmits<{
     (event: 'reset'): void
 }>()
 
-defineSlots<{
-    // [K in CoTableColumnProperty<T>]: (props: {
-    //     scopes: CoTableColumnScopes
-    // }) => any;
-    // default: any;
-    [K in keyof T]?: (props: { row: T }) => void;
-} extends {
-    default?: any;
-}>()
+defineSlots<{ default(): any } & Record<keyof T, (props: { row: T }) => any>>()
 
 const formRef = ref<FormInstance>()
 const formItemRef = ref<FormItemInstance[]>([])
@@ -72,11 +63,11 @@ const lastItemRef = ref<FormItemInstance>()
 
 const defData = reactive({
     hideForm: true, // 默认先隐藏form
-    showAll: false,
+    // showAll: false,
     hideIndex: -1,
 })
 
-// const searchData = ref(props.data)
+const searchData = ref(props.data)
 // const searchData = reactive({
 //     ...props.data
 // })
@@ -148,8 +139,8 @@ const setHideItem = async (show: boolean, wid: number) => {
 
 // 展开收起
 const onToggle = () => {
-    defData.showAll = !defData.showAll
-    setHideItem(defData.showAll, formWidth.value)
+    searchData.value.showAll = !searchData.value.showAll
+    setHideItem(searchData.value.showAll, formWidth.value)
 }
 
 // 设置form-item隐藏class名
@@ -165,7 +156,7 @@ const setElWidth = (wid?: string) => {
 
 // 监听展开、关闭状态以及form元素宽度变化
 watchEffect(() => {
-    setHideItem(defData.showAll, formWidth.value)
+    setHideItem(!!searchData.value.showAll, formWidth.value)
 }, {
     flush: 'post',
 })
@@ -178,13 +169,6 @@ defineExpose({
 // watch(() => formWidth.value, () => {
 //     setHideItem(defData.showAll, formWidth.value)
 // })
-
-onMounted(() => {
-    if (props.data.showAll) defData.showAll = true
-    // nextTick(() => {
-    //     setHideItem(defData.showAll, formWidth.value)
-    // })
-})
 </script>
 
 <style lang="scss" scoped>

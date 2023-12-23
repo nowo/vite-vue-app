@@ -1,19 +1,18 @@
 <template>
     <CoFormTool :data="searchData" inline @search="onSearch" @reset="onSearch">
         <template #category_id="{ row }">
-            <co-cascader v-model="row.category_id" class="w100%" :options="defData.typeList"
-                :props="{ emitPath: false, checkStrictly: true, label: 'cat_name', value: 'cat_id' }" />
+            <el-select v-model="row.brand_id" filterable placeholder="请选择" clearable>
+                <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
         </template>
         <template #brand_id="{ row }">
             <el-select v-model="row.brand_id" filterable placeholder="请选择" clearable>
-                <el-option v-for="item in defData.typeList" :key="item.brand_id" :label="item.brand_name"
-                    :value="item.brand_id" />
+                <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
         </template>
         <template #type_id="{ row }">
             <el-select v-model="row.type_id" filterable placeholder="请选择" clearable>
-                <el-option v-for="item in defData.typeList" :key="item.type_id" :label="item.type_name"
-                    :value="item.type_id" />
+                <el-option v-for="item in defData.typeList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
         </template>
         <template #supplier_id="{ row }">
@@ -25,7 +24,22 @@
 <script lang="ts" setup>
 const defData = reactive({
     visible: false,
-    typeList: [] as any[],
+    typeList: [
+        {
+            id: 1,
+            name: '名称',
+        },
+    ],
+    brandList: [
+        {
+            id: 1,
+            name: '百度',
+        },
+        {
+            id: 2,
+            name: '网易',
+        },
+    ],
 })
 
 // form表单数据类型
@@ -71,7 +85,7 @@ const searchData = reactive<SearchDataType<FormSearchData>>({
 
 // 搜索
 const onSearch = () => {
-
+    console.log('searchData.data :>> ', searchData.data)
 }
 
 // 重置

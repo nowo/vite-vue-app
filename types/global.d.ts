@@ -20,7 +20,7 @@ interface ImportMetaEnv {
 }
 
 // search搜索项 数据格式公共类型
-declare interface SearchDataType<T, U = any> {
+declare interface SearchDataType<T = Record<string, any>> {
     data: T
     // config: {
     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
