@@ -66,9 +66,9 @@ const tableData = reactive<CoTableType<TableDataItem>>({
         { property: 'role_name', label: '关联角色', width: 130 },
         { property: 'company_name', label: '所属公司', minWidth: 130 },
         { property: 'phone', label: '手机号', width: 120 },
-        { property: 'last_login_time', label: '最后登录时间', width: 155 },
-        { property: 'status', label: '员工状态', width: 85, align: 'center', slot: true },
-        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', slot: true },
+        { property: 'last_login_time', label: '最后登录时间', width: 155, isHide: true },
+        { property: 'status', label: '员工状态', width: 85, align: 'center', slot: true, isHide: true },
+        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', slot: true, isHide: true },
     ],
     pagination: {
         page: 1, // 当前页面

@@ -166,7 +166,11 @@ const onHandleSizeChange = async (val: number) => {
     tableRef.value?.setScrollTop(0)
 }
 
-const headerList = computed(() => props.tableHeader)
+const headerList = computed(() => {
+    // 过滤隐藏项
+    const data = props.tableHeader.filter(item => !item.isHide)
+    return data
+})
 // const setHeader = ref(props.tableHeader)
 // // 设置 tool header 数据
 // const setHeader = computed(() => {

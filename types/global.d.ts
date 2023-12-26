@@ -39,6 +39,7 @@ interface CoTableHeader<T> extends CoTableColumnCtx<T> {
     label: string
     slot?: boolean
     slotHeader?: boolean
+    isHide?: boolean // 是否隐藏项
 }
 
 type CoTableColumnProperty<T> = CoTableHeader<T>['property'] | `${keyof T}Header` | 'operateHeader'
