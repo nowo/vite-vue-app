@@ -1,9 +1,8 @@
 import antfu from '@antfu/eslint-config'
-import unocss from '@unocss/eslint-plugin'
 
 export default antfu(
     {
-        // unocss: true,
+        unocss: true,
         // formatters: true,
         stylistic: {
             indent: 4, // 4, or 'tab'
@@ -30,7 +29,6 @@ export default antfu(
             'src/router/layout.ts',
         ],
     },
-    unocss.configs.flat,
     {
         rules: {
             // 保存代码时缩进4个空格

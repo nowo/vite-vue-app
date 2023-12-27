@@ -38,7 +38,7 @@
 
 <script lang="ts" setup  generic="T">
 import type { PropType } from 'vue'
-import { computed, nextTick, reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
 import { useElementBounding, useElementSize } from '@vueuse/core'
 import { wait } from '@/utils/common'

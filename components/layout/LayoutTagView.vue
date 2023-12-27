@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type UseDraggableReturn, VueDraggable } from 'vue-draggable-plus'
+import { VueDraggable } from 'vue-draggable-plus'
 import type { ScrollbarInstance } from 'element-plus'
 
 const scrollbarRef = ref<ScrollbarInstance>()

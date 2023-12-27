@@ -24,8 +24,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ElMessage, ElMessageBox } from 'element-plus'
-
 // import { CoTable } from '#build/components'
 
 definePageMeta({

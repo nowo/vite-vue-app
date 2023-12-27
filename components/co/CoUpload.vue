@@ -21,7 +21,6 @@
         </VueDraggable>
         <el-image-viewer v-if="defData.showImg.viewer" :url-list="uploadList" :z-index="10000"
             :initial-index="defData.showImg.index" teleported @close="closeView" />
-            
     </div>
 </template>
 
