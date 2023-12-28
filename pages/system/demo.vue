@@ -19,6 +19,26 @@
             供应商选择{{ row }}
         </template>
     </CoFormTool>
+    <CoFormToolDemo :data="searchData" inline @search="onSearch" @reset="onSearch">
+        <template #category_id="{ row }">
+            <el-select v-model="row.brand_id" filterable placeholder="请选择" clearable>
+                <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
+        </template>
+        <template #brand_id="{ row }">
+            <el-select v-model="row.brand_id" filterable placeholder="请选择" clearable>
+                <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
+        </template>
+        <template #type_id="{ row }">
+            <el-select v-model="row.type_id" filterable placeholder="请选择" clearable>
+                <el-option v-for="item in defData.typeList" :key="item.id" :label="item.name" :value="item.id" />
+            </el-select>
+        </template>
+        <template #supplier_id="{ row }">
+            供应商选择{{ row }}
+        </template>
+    </CoFormToolDemo>
 </template>
 
 <script lang="ts" setup>
