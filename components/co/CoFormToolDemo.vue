@@ -36,7 +36,7 @@
     </el-form>
 </template>
 
-<script lang="ts" setup generic="T=Record<string, any>">
+<script lang="ts" setup generic="T extends Record<string, any>">
 import type { FormInstance, FormItemInstance, FormItemProps } from 'element-plus'
 
 // const props = defineProps({
@@ -165,7 +165,7 @@ const setHideItem = async (show: boolean, wid: number) => {
     const lastWidth = lastItemRef.value?.$el.getBoundingClientRect()
 
     const indexArr: number[] = []
-    props.data.config.reduce((prev, next, index) => {
+    props.data.config.filter(item => !item.isHide).reduce((prev, next, index) => {
         // const elBound = formItemRef.value[index].$el.getBoundingClientRect()
         // const count = prev + elBound.width
         let elWidth = 0

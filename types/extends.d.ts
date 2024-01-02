@@ -7,7 +7,7 @@ import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
-import type { TableColumnCtx } from 'element-plus'
+import type { FormItemProps, TableColumnCtx } from 'element-plus'
 
 declare global {
     type ComponentInstance = {
@@ -19,6 +19,10 @@ declare global {
     type RouteRecordCustom = RouteRecordRaw
 
     type CoTableColumnCtx<T> = Partial<TableColumnCtx<T>>
+
+    type CoSearchDataColumnItem<T = string> = Partial<FormItemProps> & {
+        prop: keyof T
+    }
 
 }
 

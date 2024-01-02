@@ -25,7 +25,7 @@ declare interface SearchDataType<T = Record<string, any>> {
     // config: {
     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
     // },
-    config: { column: { label: string, prop: keyof T, [key: string]: any }, slot?: boolean, placeholder?: string, width?: string }[]
+    config: { column: CoSearchDataColumnItem<T>, slot?: boolean, placeholder?: string, width?: string, isHide?: boolean }[]
     // searchFunc?: () => void,     // 查询方法
     hideBtn?: boolean
     showAll?: boolean

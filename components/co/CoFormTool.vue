@@ -1,9 +1,7 @@
 <template>
     <el-form v-if="searchData.config.length" ref="formRef" v-bind="$attrs" :model="searchData.data">
-        <!-- :ref="setItemRef" -->
-        <!-- :ref="(el: FormItemInstance | any) => { if (el) formItemRef[index] = el }" -->
-        <el-form-item v-for="(item, index) in searchData.config" :key="index" ref="formItemRef"
-            :class="setFormItemClass(index)" v-bind="item.column" :prop="setFormPropName(item.column.prop as string)">
+        <el-form-item v-for="(item, index) in searchData.config.filter(item => !item.isHide)" :key="index" ref="formItemRef"
+            :class="setFormItemClass(index)" v-bind="item.column" :prop="item.column.prop">
             <div class="item-content" :style="{ width: setElWidth(item.width) }">
                 <slot v-if="item.slot" :name="item.column.prop" :row="searchData.data" />
                 <el-input v-else v-model.trim="searchData.data[item.column.prop]" :placeholder="item.placeholder" clearable
@@ -36,7 +34,7 @@
     </el-form>
 </template>
 
-<script lang="ts" setup generic="T">
+<script lang="ts" setup generic="T extends Record<string, any>">
 import type { FormInstance, FormItemInstance } from 'element-plus'
 
 // const props = defineProps({
@@ -51,6 +49,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
+    (event: 'update:data'): void
     (event: 'search'): void
     (event: 'reset'): void
 }>()
@@ -67,10 +66,17 @@ const defData = reactive({
     hideIndex: -1,
 })
 
-const searchData = ref(props.data)
+// const searchData = ref(props.data)
 // const searchData = reactive({
 //     ...props.data
 // })
+const searchData = computed({
+    get: () => props.data,
+    set: (val) => {
+        emits('update:data')
+        // props.data = val
+    },
+})
 
 // const searchData = reactive({
 //     data: props.data.data,
@@ -100,10 +106,6 @@ const searchData = ref(props.data)
 
 const { width: formWidth } = useElementSize(formRef as any)
 
-const setFormPropName = (name: string) => {
-    return name
-}
-
 // 查询
 const onSearch = () => {
     emits('search')
@@ -128,8 +130,13 @@ const setHideItem = async (show: boolean, wid: number) => {
 
     const indexArr: number[] = []
     props.data.config.reduce((prev, next, index) => {
-        const elBound = formItemRef.value[index].$el.getBoundingClientRect()
-        const count = prev + elBound.width
+        // const elBound = formItemRef.value[index].$el.getBoundingClientRect()
+        // const count = prev + elBound.width
+        let elWidth = 0
+        if (formItemRef.value[index]) {
+            elWidth = formItemRef.value[index].$el.getBoundingClientRect().width
+        }
+        const count = prev + elWidth
         if (formWid - count < lastWidth.width) indexArr.push(index)
         return count
     }, 0)
