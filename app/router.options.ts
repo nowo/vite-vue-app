@@ -11,8 +11,11 @@ const customRoutes = [
     },
 ]
 export default {
-    routes: _routes => [
-        ..._routes,
-        // ...customRoutes,
-    ],
+    routes: (_routes) => {
+        console.log('_routes :>> ', _routes)
+        return [
+            ..._routes,
+            // ...customRoutes,
+        ]
+    },
 }

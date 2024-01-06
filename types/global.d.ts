@@ -1,5 +1,6 @@
 declare module 'element-plus/dist/locale/zh-cn.mjs';
 declare module 'element-plus/dist/locale/en.mjs';
+declare module 'numbro/languages/zh-CN';
 
 // declare module "@auth/core/types" {
 //     interface Session {
@@ -37,9 +38,13 @@ interface CoTableHeader<T> extends CoTableColumnCtx<T> {
     property: keyof T | 'operate' | ''
     // property: CoTableColumnProperty<T>
     label: string
-    slot?: boolean
-    slotHeader?: boolean
-    isHide?: boolean // 是否隐藏项
+    other?: {
+        // slot?: boolean
+        slotHeader?: boolean
+        isHide?: boolean // 是否隐藏项
+        isShow?: boolean // 是否显示字段
+    }
+
 }
 
 type CoTableColumnProperty<T> = CoTableHeader<T>['property'] | `${keyof T}Header` | 'operateHeader'
@@ -53,12 +58,15 @@ declare interface CoTableType<T = object> {
     //     slot?: boolean
     //     // [key: string]: any
     // } extends CoTableColumnCtx<T>)[]
+
     tableHeader: CoTableHeader<T>[]
-    pagination: {
+    pagination: { // 分页
         total: number
         page: number
         page_size: number
         page_sizes: number[]
     }
-    loading?: boolean
+    isTool?: boolean // 是否显示配置栏
+
+    loading?: boolean // loading
 }

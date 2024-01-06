@@ -1,35 +1,56 @@
 <template>
-    <div ref="tablePageRef" class="table-page">
-        <div class="table-page-content">
-            <el-table ref="tableRef" :data="props.data" :max-height="tableHeight" scrollbar-always-on highlight-current-row
-                v-bind="$attrs">
-                <el-table-column v-for="(item, index) in headerList" :key="index" show-overflow-tooltip
-                    v-bind="setColumnAttrs(item)">
-                    <template v-if="item.slotHeader" #header="scope">
+    <div class="table-page">
+        <div class="flex items-end justify-between">
+            <div>
+                <slot />
+            </div>
+            <div v-if="!propsData.isTool">
+                <el-popover :width="240" popper-class="popover-box" trigger="click">
+                    <template #reference>
+                        <el-button circle>
+                            <i class="i-ep-operation block" />
+                        </el-button>
+                    </template>
+                    <VueDraggable v-model="headerList" tag="ul" class="move-box" handle=".handle">
+                        <li v-for="(item, index) in headerList" :key="index"
+                            class="flex items-center justify-between px8px">
+                            <i class="i-ep-rank handle mr5px inline-block cursor-pointer" />
+                            <div class="flex-1 text-truncate">
+                                <el-checkbox v-model="item.other.isShow" :label="item.label" @change="onCheckBox" />
+                            </div>
+                            <div class="flex items-center pl5px">
+                                <div class="pin-icon mr5px" @click="onFixedItem('left', item)">
+                                    <i v-if="item.fixed === 'left'" class="pin-active i-mdi:pin rotate-30" />
+                                    <i v-else class="i-mdi:pin-outline rotate-30" />
+                                </div>
+                                <div class="pin-icon" @click="onFixedItem('right', item)">
+                                    <i v-if="item.fixed === 'right'" class="pin-active i-mdi:pin -rotate-30" />
+                                    <i v-else class="i-mdi:pin-outline -rotate-30" />
+                                </div>
+                            </div>
+                        </li>
+                    </VueDraggable>
+                </el-popover>
+            </div>
+        </div>
+        <div class="flex-1 overflow-hidden">
+            <!--  :max-height="tableHeight" -->
+            <el-table ref="tableRef" :data="propsData.data" scrollbar-always-on highlight-current-row class="h100%!"
+                v-bind="newAttrs">
+                <el-table-column v-for="(item, index) in headerList.filter(item => item.other.isShow)" :key="index"
+                    show-overflow-tooltip v-bind="setColumnAttrs(item)">
+                    <template v-if="item.other?.slotHeader" #header="scope">
                         <slot :name="setSlotHeaderName(item)" :scopes="scope" />
                     </template>
                     <!-- 这里根据slot字段来判断是否使用插槽 -->
                     <template v-if="item.type !== 'selection' && item.type !== 'index'" #default="scope">
-                        <slot v-if="item.slot" :name="item.property" :scopes="scope" />
+                        <slot v-if="$slots[item.property as any]" :name="item.property" :scopes="scope" />
                         <span v-else>{{ scope.row[item.property] }}</span>
                     </template>
                 </el-table-column>
             </el-table>
         </div>
-        <!-- <el-popover :width="300" popper-class="popover-box" trigger="click" @show="onSetTable">
-            <template #reference>
-                <el-avatar src="https://avatars.githubusercontent.com/u/72015883?v=4" />
-            </template>
-            <template #default>
-                <ul ref="moveRef" class="move-box">
-                    <li v-for="(item, index) in setHeader" :key="index" :data-key="item.property">
-                        <el-icon class="move-icon mr5px"><ele-Rank /></el-icon><el-checkbox v-model="item.check"
-                            :label="item.label" />
-                    </li>
-                </ul>
-            </template>
-        </el-popover> -->
-        <el-pagination v-if="defData.pagination.total" ref="pageRef" v-model:current-page="defData.pagination.page"
+        <el-pagination v-if="defData.pagination.total" v-model:current-page="defData.pagination.page"
             v-model:page-size="defData.pagination.page_size" :small="smallSize" :page-sizes="defData.pagination.page_sizes"
             :total="defData.pagination.total" :pager-count="5" background layout="total, sizes, prev, pager, next, jumper"
             class="mt15px" @size-change="onHandleSizeChange" @current-change="onHandleCurrentChange" />
@@ -37,10 +58,9 @@
 </template>
 
 <script lang="ts" setup  generic="T">
-import type { PropType } from 'vue'
 import { computed, reactive, ref } from 'vue'
+import { VueDraggable } from 'vue-draggable-plus'
 import type { TableColumnCtx, TableInstance } from 'element-plus'
-import { useElementBounding, useElementSize } from '@vueuse/core'
 import { wait } from '@/utils/common'
 
 type CoTablePropsType = CoTableType<T>
@@ -52,33 +72,13 @@ interface CoTableColumnScopes {
     $index: number
     cellIndex: number
 }
-
-const props = defineProps({
-    data: {
-        type: Array as PropType<CoTablePropsType['data']>,
-        default: () => [],
-    },
-    tableHeader: {
-        type: Array as PropType<CoTablePropsType['tableHeader']>,
-        required: true,
-    },
-    page: {
-        type: Object as PropType<CoTablePropsType['pagination']>,
-        required: true,
-    },
-    hide: {
-        type: Boolean,
-        default: false,
-    },
-    autoHeight: {
-        type: Boolean,
-        default: false,
-    },
-})
+const props = defineProps<{
+    data: CoTableType<T>
+}>()
 
 const emits = defineEmits<{
-    (e: 'update:page', param: CoTablePropsType['pagination']): void
-    (e: 'update:table-header', param: CoTablePropsType['tableHeader']): void
+    (e: 'update:data', param: CoTableType<T>): void
+    (e: 'pagination', param: CoTableType<T>['pagination']): void
 }>()
 
 // const slots = defineSlots<{
@@ -86,7 +86,7 @@ const emits = defineEmits<{
 //     [K in keyof TableHeaderType['property']]:(props: { scopes: T })=>any
 // } & Record<CoTableColumnProperty<T>, (props: { scopes: CoTableColumnScopes }) => any>>()
 
-defineSlots<{
+defineSlots<{ default: any } & {
     // [K in CoTableColumnProperty<T>]: (props: {
     //     scopes: CoTableColumnScopes
     // }) => any;
@@ -97,23 +97,38 @@ const { themeConfig } = useThemeState()
 
 const tableRef = ref<TableInstance>()
 
-// 高度变化，更新最大高度
-const tablePageRef = ref<HTMLDivElement>()
-const pageRef = ref<HTMLDivElement>()
-const { height: tHei } = useElementSize(tablePageRef)
-const { height: pageHei } = useElementBounding(pageRef)
-const tableHeight = computed(() => {
-    if (props.autoHeight) return 'unset'
-    const pHei = pageHei.value ? pageHei.value + 15 : 0
-    const hei = Math.floor(tHei.value - pHei) % 2 ? Math.floor(tHei.value - pHei) - 1 : Math.floor(tHei.value - pHei)
-    // unset\min-content
-    return hei > 0 ? hei : 'unset'
+const propsData = computed({
+    get: () => {
+        return props.data
+    },
+    set: (val) => {
+        emits('update:data', val)
+    },
+})
+// table表头配置
+const headerList = computed({
+    get: () => {
+        // 过滤隐藏项
+        const tableHeader = props.data.tableHeader.filter(item => !item?.other?.isHide).map((item) => {
+            // 设置默认显示
+            const other = item.other || {}
+            other.isShow = item.other?.isShow === undefined ? true : item.other?.isShow
+            return {
+                ...item,
+                other,
+            }
+        })
+        return tableHeader
+    },
+    set: (val) => {
+        propsData.value.tableHeader = val
+    },
 })
 
 // 默认数据列表
 const defData = reactive({
     visible: false,
-    pagination: props.page,
+    pagination: props.data.pagination,
     time: 0, // 用于分页和分页数量同时改变时，更新数据判断
 })
 
@@ -123,20 +138,17 @@ const smallSize = computed(() => {
 })
 
 // 属性透传，去除id、class、style，不传入el-table组件
-// const attrs = useAttrs();
-// const newAttrs = computed(() => {
-//     const att = deepClone(attrs);
-//     if (att.style) delete att.style;
-//     if (att.class) delete att.class;
-//     if (att.id) delete att.id;
-//     return att
-// })
+const attrs = useAttrs()
+const newAttrs = computed(() => {
+    const { class: a, id, style, ...att } = attrs // eslint-disable-line unused-imports/no-unused-vars
+    // if (att.style) delete att.style;
+    // if (att.class) delete att.class;
+    // if (att.id) delete att.id;
+    return att
+})
 
 const setColumnAttrs = (item: TableHeaderType): any => {
-    const attr = JSON.parse(JSON.stringify(item))
-    // const attr = deepClone(item)
-    // attr.property = String(attr.property);
-    if (attr.slot) delete attr.slot
+    const { other, ...attr } = item // eslint-disable-line unused-imports/no-unused-vars
     return attr
 }
 
@@ -147,63 +159,39 @@ const setSlotHeaderName = (row: TableHeaderType) => {
 // 分页点击
 const onHandleCurrentChange = (val: number) => {
     const { total, page_size } = defData.pagination
-    if (total < page_size && props.data.length === total) return
+    if (total < page_size && propsData.value.data.length === total) return
 
     defData.time = Date.now()
-    emits('update:page', defData.pagination)
+    emits('pagination', defData.pagination)
     tableRef.value?.setScrollTop(0)
 }
 // 分页数量点击
 const onHandleSizeChange = async (val: number) => {
     const { total, page_size } = defData.pagination
-    if (total < page_size && props.data.length === total) return
+    if (total < page_size && propsData.value.data.length === total) return
     // 分页跟分页数量同时改变时，通过时间去判断让他只调用一个方法
     await wait(10) // 等待10ms，defData.time才可能是最新的
     if (Date.now() - defData.time < 20) return
     defData.time = Date.now()
 
-    emits('update:page', defData.pagination)
+    emits('pagination', defData.pagination)
     tableRef.value?.setScrollTop(0)
 }
 
-const headerList = computed(() => {
-    // 过滤隐藏项
-    const data = props.tableHeader.filter(item => !item.isHide)
-    return data
-})
-// const setHeader = ref(props.tableHeader)
-// // 设置 tool header 数据
-// const setHeader = computed(() => {
-//     return props.header.filter(v => v.isCheck)
-// })
-// const moveRef = ref<HTMLDivElement>()
-// 设置
-// const onSetTable = () => {
-//     nextTick(() => {
-//         const sortable = Sortable.create(moveRef.value, {
-//             handle: '.move-icon',
-//             dataIdAttr: 'data-key',
-//             animation: 150,
-//             onEnd: () => {
-//                 const tableHead = props.tableHeader
-//                 // ;
-//                 const headerList: TableHeaderType[] = []
-//                 sortable.toArray().forEach((val: string) => {
-//                     // ;
-//                     // tableHead.forEach((v) => {
-//                     //     if (v.property === val) headerList.push({ ...v })
-//                     // })
-//                     const node = tableHead.find(item => item.property === val)
-//                     if (node) headerList.push({ ...node })
-//                 })
-//                 // ;
-//                 // ;
-//                 // setHeader.value=headerList;
-//                 emits('update:table-header', headerList)
-//             },
-//         })
-//     })
-// }
+// 选中（显示、隐藏）
+const onCheckBox = () => {
+    propsData.value.tableHeader = headerList.value
+}
+
+const onFixedItem = (type: 'left' | 'right', row: CoTableHeader<T>) => {
+    // if (type === 'left') {
+    //     row.fixed = row.fixed === type ? false : type
+    // } else if (type === 'right') {
+    //     row.fixed = row.fixed === type ? false : type
+    // }
+    row.fixed = row.fixed === type ? false : type
+    propsData.value.tableHeader = headerList.value
+}
 
 // 因设置keepalive缓存时，table组件滚动条位置不对处理
 onActivated(() => {
@@ -223,24 +211,33 @@ defineExpose({
     height: 100%;
     overflow: auto;
     border: 0;
-
-    &-content {
-        flex: 1;
-    }
 }
-</style>
 
-<style lang="scss">
-.popover-box {
-    padding: 3px 0 !important;
+.move-box {
 
-    .move-box li {
-        padding: 0 10px;
-        list-style: none;
+    // background-color: var(--el-color-primary-light-9);
+    :deep(.sortable-chosen) {
+        background-color: var(--el-color-info-light-9);
+    }
 
-        &:hover {
-            background-color: var(--el-fill-color-light);
+    :deep(.el-checkbox) {
+        --el-checkbox-height: 28px;
+    }
+
+    .pin-icon {
+        cursor: pointer;
+        overflow: hidden;
+
+        >i {
+            display: block;
+            font-size: 16px;
+            color: var(--el-color-info);
+
+            &.pin-active {
+                color: var(--el-color-primary)
+            }
         }
     }
+
 }
 </style>

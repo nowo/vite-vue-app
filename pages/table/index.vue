@@ -1,26 +1,30 @@
 <template>
-    <CoTableDemo v-model:page="tableData.pagination" v-model:table-header="tableData.tableHeader" class="jm-box"
-        :data="tableData.data" auto-height @update:page="onHandleCurrentChange">
-        <template #company_idHeader>
-            111
-        </template>
-        <template #status="{ scopes }">
-            <el-tag v-if="scopes.row.status === 1" type="success">
-                启用
-            </el-tag>
-            <el-tag v-else type="info">
-                禁用
-            </el-tag>
-        </template>
-        <template #operate="{ scopes }">
-            <el-button size="small" link type="primary" @click="onOpenDialog('edit', scopes.row)">
-                修改
+    <div class="1overflow-hidden 1h-80vh">
+        <CoTable v-model:data="tableData" @pagination="onHandleCurrentChange">
+            <el-button type="success">
+                新增
             </el-button>
-            <el-button size="small" link type="primary" @click="onDel(scopes)">
-                删除
-            </el-button>
-        </template>
-    </CoTableDemo>
+            <template #company_idHeader>
+                111
+            </template>
+            <template #status="{ scopes }">
+                <el-tag v-if="scopes.row.status === 1" type="success">
+                    启用
+                </el-tag>
+                <el-tag v-else type="info">
+                    禁用
+                </el-tag>
+            </template>
+            <template #operate="{ scopes }">
+                <el-button size="small" link type="primary" @click="onOpenDialog('edit', scopes.row)">
+                    修改
+                </el-button>
+                <el-button size="small" link type="primary" @click="onDel(scopes)">
+                    删除
+                </el-button>
+            </template>
+        </CoTable>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -55,6 +59,7 @@ interface TableDataItem {
 }
 const tableData = reactive<CoTableType<TableDataItem>>({
     data: [],
+    // config: {
     tableHeader: [
         { property: 'id', label: 'id', width: 140 },
         { property: 'account', label: '登录账号', minWidth: 120 },
@@ -62,11 +67,11 @@ const tableData = reactive<CoTableType<TableDataItem>>({
         { property: 'name', label: '员工名称', minWidth: 150 },
         { property: 'group_name', label: '员工分类', minWidth: 150 },
         { property: 'role_name', label: '关联角色', width: 130 },
-        { property: 'company_name', label: '所属公司', minWidth: 130 },
+        { property: 'company_name', label: '所属公司最后登录时间最后登录时间最后登录时间最后登录时间最后登录时间', minWidth: 130 },
         { property: 'phone', label: '手机号', width: 120 },
-        { property: 'last_login_time', label: '最后登录时间', width: 155, isHide: true },
-        { property: 'status', label: '员工状态', width: 85, align: 'center', slot: true, isHide: true },
-        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', slot: true, isHide: true },
+        { property: 'last_login_time', label: '最后登录时间', width: 155, other: { isHide: true } },
+        { property: 'status', label: '员工状态', width: 85, align: 'center', other: { isShow: false } },
+        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', other: { isHide: true } },
     ],
     pagination: {
         page: 1, // 当前页面
@@ -74,6 +79,7 @@ const tableData = reactive<CoTableType<TableDataItem>>({
         page_sizes: [20, 50, 100, 200, 500],
         total: 0,
     },
+    // },
 })
 
 const initDefaultData = async () => {
@@ -81,15 +87,14 @@ const initDefaultData = async () => {
 
 }
 
-// 初始化表格数据
-const initTableData = async () => {
+const allData = Array.from({ length: 50 }).map((item) => {
     const data: TableDataItem = {
         id: new Date().getTime(),
         account: 'admin',
-        name: '张三',
+        name: `张三_${Math.floor(Math.random() * 1000)}`,
         company_name: '工游记科技有限公司',
-        phone: '10086110',
-        group_name: '1',
+        phone: `17786${Math.floor(Math.random() * 1000000)}`,
+        group_name: `组_${Math.floor(Math.random() * 100)}`,
         password: '',
         last_login_time: '',
         role_id: 0,
@@ -97,7 +102,15 @@ const initTableData = async () => {
         company_id: 0,
         role_name: '',
     }
-    tableData.data.push(data)
+    return data
+})
+
+// 初始化表格数据
+const initTableData = async () => {
+    tableData.pagination.total = allData.length
+
+    const end = tableData.pagination.page * tableData.pagination.page_size
+    tableData.data = allData.slice(end - tableData.pagination.page_size, end)
 
     // tableData.data = res.data.list
     // tableData.pagination.total = res.data.total || 0
