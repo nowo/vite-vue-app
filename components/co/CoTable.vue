@@ -1,10 +1,10 @@
 <template>
     <div class="table-page">
-        <div class="flex items-end justify-between">
+        <div v-if="$slots.default || propsData.isTool" class="mb8px flex items-end justify-between">
             <div>
                 <slot />
             </div>
-            <div v-if="!propsData.isTool">
+            <div v-if="propsData.isTool">
                 <el-popover :width="240" popper-class="popover-box" trigger="click">
                     <template #reference>
                         <el-button circle>

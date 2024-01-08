@@ -1,9 +1,11 @@
 <template>
     <div class="1overflow-hidden 1h-80vh">
-        <CoTable v-model:data="tableData" @pagination="onHandleCurrentChange">
-            <el-button type="success">
-                新增
-            </el-button>
+        <CoTable v-model:data="tableData" border @pagination="onHandleCurrentChange">
+            <!-- <div>
+                <el-button type="success">
+                    新增
+                </el-button>
+            </div> -->
             <template #company_idHeader>
                 111
             </template>
@@ -80,6 +82,7 @@ const tableData = reactive<CoTableType<TableDataItem>>({
         total: 0,
     },
     // },
+    isTool: true,
 })
 
 const initDefaultData = async () => {

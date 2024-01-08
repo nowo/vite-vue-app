@@ -1,6 +1,23 @@
-*{
+* {
     font-size: 14px;
+    --co-scrollbar-width: 10px; // 滚动条宽度
 }
+
 :focus-visible {
     outline: unset;
+}
+
+// element-plus 滚动条样式
+.el-scrollbar {
+    .el-scrollbar__bar {
+        z-index: 5;
+
+        &.is-vertical {
+            width: var(--co-scrollbar-width);
+        }
+
+        &.is-horizontal {
+            height: var(--co-scrollbar-width);
+        }
+    }
 }
