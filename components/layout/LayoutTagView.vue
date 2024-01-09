@@ -1,14 +1,16 @@
 <!-- 标签页 -->
 <template>
     <el-scrollbar ref="scrollbarRef" @wheel.prevent="onHandleScroll">
-        <VueDraggable v-model="list" tag="ul" class="tag-view-ul flex gap-5px p8px" @end="onEnd">
-            <!-- <ul class="tag-view-ul flex gap-5px p8px"> -->
-            <!-- :class="{on:$route.path===v.path}" -->
-            <li v-for="item in list" :key="item" class="tag-view-item">
-                {{ item }}
-            </li>
-            <!-- </ul> -->
-        </VueDraggable>
+        <ClientOnly>
+            <VueDraggable v-model="list" tag="ul" :animation="300" class="tag-view-ul flex gap-5px p8px" @end="onEnd">
+                <!-- <ul class="tag-view-ul flex gap-5px p8px"> -->
+                <!-- :class="{on:$route.path===v.path}" -->
+                <li v-for="item in list" :key="item" class="tag-view-item">
+                    {{ item }}
+                </li>
+                <!-- </ul> -->
+            </VueDraggable>
+        </ClientOnly>
     </el-scrollbar>
 </template>
 
