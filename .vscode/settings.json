@@ -94,16 +94,17 @@
         "cooj",
         "defu",
         "iconify",
+        "nitropack",
+        "nuxi",
+        "Nuxt",
         "pinia",
+        "Splitpanes",
         "stylelint",
         "swiper",
         "unjs",
         "Uno",
         "unocss",
         "Vite",
-        "vueuse",
-        "nitropack",
-        "nuxi",
-        "Nuxt",
+        "vueuse"
     ]
 }

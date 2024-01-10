@@ -14,7 +14,7 @@
                     <VueDraggable v-model="headerList" tag="ul" class="move-box" handle=".handle" :animation="260">
                         <li v-for="(item, index) in headerList" :key="index"
                             class="flex items-center justify-between px8px">
-                            <i class="i-ep-rank handle mr5px inline-block cursor-pointer" />
+                            <i class="handle i-ep-rank mr5px inline-block cursor-pointer" />
                             <div class="flex-1 text-truncate">
                                 <el-checkbox v-model="item.other.isShow" :label="item.label" @change="onCheckBox" />
                             </div>
