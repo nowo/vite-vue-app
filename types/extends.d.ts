@@ -26,6 +26,27 @@ declare global {
 
 }
 
+// 扩展 RouteMeta 接口
+declare module 'vue-router' {
+    interface RouteMeta {
+        title?: string  // 页面标题、名称
+
+        isHide?: boolean    // 是否隐藏
+        isKeepAlive?: boolean   // 是否使用组件缓存
+        isAffix?: boolean   // 是否固定菜单
+        isLink?: boolean    // 是否使用外链
+        linkUrl?: string    // 外链地址
+        isIframe?: boolean  // 是否使用iframe嵌入
+        roles?: string[]
+        icon?: string   // 菜单图标
+
+        isDynamic?: boolean // 是否使用的动态路由
+        isDynamicPath?: string // 动态路径
+        
+        id?: number // 数据表对应id主键字段
+    }
+}
+
 declare module 'h3' {
     interface H3EventContext {
         prisma: PrismaClient

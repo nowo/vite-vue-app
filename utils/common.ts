@@ -13,3 +13,30 @@ export const wait = (ms: number) => {
         setTimeout(resolve, ms)
     })
 }
+
+/**
+ * 数据深拷贝方法
+ * @param data 原数据
+ * @returns 拷贝后的新数据
+ */
+export const deepClone = <T = any>(data: T): T => {
+    let newObj: any
+    // 先使用原生自带的深拷贝，出错了就使用自己自定义的方法
+    try {
+        newObj = structuredClone(data)
+    } catch (err) {
+        try {
+            newObj = Array.isArray(data) ? [] : {}
+        } catch (error) {
+            newObj = {}
+        }
+        for (const attr in data) {
+            if (data[attr] && typeof data[attr] === 'object') {
+                newObj[attr] = deepClone(data[attr])
+            } else {
+                newObj[attr] = data[attr]
+            }
+        }
+    }
+    return newObj
+}
