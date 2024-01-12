@@ -1,27 +1,30 @@
 <template>
     <div class="1overflow-hidden 1h-80vh">
-        <CoTable v-model:data="tableData" border @pagination="onHandleCurrentChange">
+        <CoTable v-model:data="tableData" border @refresh="initTableData" @pagination="onHandleCurrentChange">
             <!-- <div>
                 <el-button type="success">
                     新增
                 </el-button>
             </div> -->
-            <template #company_idHeader>
-                111
+            <!-- <template #nameHeader="a">
+                {{ test(a) }}
+            </template> -->
+            <template #name="a">
+                {{ a.row.name }}
             </template>
-            <template #status="{ scopes }">
-                <el-tag v-if="scopes.row.status === 1" type="success">
+            <template #status="{ row }">
+                <el-tag v-if="row.status === 1" type="success">
                     启用
                 </el-tag>
                 <el-tag v-else type="info">
                     禁用
                 </el-tag>
             </template>
-            <template #operate="{ scopes }">
-                <el-button size="small" link type="primary" @click="onOpenDialog('edit', scopes.row)">
+            <template #operate="{ row }">
+                <el-button size="small" link type="primary" @click="onOpenDialog('edit', row)">
                     修改
                 </el-button>
-                <el-button size="small" link type="primary" @click="onDel(scopes)">
+                <el-button size="small" link type="primary" @click="onDel(row)">
                     删除
                 </el-button>
             </template>
@@ -124,8 +127,7 @@ const onOpenDialog = (type: any, row?: TableDataItem) => {
 }
 
 // 删除员工
-// const onDel = (row: TableDataItem) => {
-const onDel = (row: any) => {
+const onDel = (row: TableDataItem) => {
     console.log('row :>> ', row)
 }
 

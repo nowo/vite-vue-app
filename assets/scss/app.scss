@@ -21,3 +21,13 @@
         }
     }
 }
+
+// 下拉菜单样式
+.el-dropdown-menu {
+    .el-dropdown-menu__item {
+        &.el-dropdown-menu__item-active {
+            background-color: var(--el-dropdown-menuItem-hover-fill);
+            color: var(--el-dropdown-menuItem-hover-color);
+        }
+    }
+}

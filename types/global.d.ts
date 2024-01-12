@@ -48,7 +48,9 @@ interface CoTableHeader<T> extends CoTableColumnCtx<T> {
 
 }
 
-type CoTableColumnProperty<T> = CoTableHeader<T>['property'] | `${keyof T}Header` | 'operateHeader'
+type CoTableColumnPropertyHeader<T> = `${keyof T}Header` | 'operateHeader'
+
+type CoTableColumnProperty<T> = CoTableHeader<T>['property'] 
 
 // table 数据格式公共类型
 declare interface CoTableType<T = object> {

@@ -1,13 +1,13 @@
 <template>
     <div>
-        <VueDraggable v-model="tableData.data"  class="h-80vh overflow-hidden" :animation="200" target=".el-table__body>tbody" handle=".drag-icon"
-            group="g1" @end="onEnd">
+        <VueDraggable v-model="tableData.data" class="h-80vh overflow-hidden" :animation="200"
+            target=".el-table__body>tbody" handle=".drag-icon" group="g1" @end="onEnd">
             <CoTable ref="listRef" v-model:data="tableData" class="table-box" :row-class-name="setRowClassName" row-key="id"
                 :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @pagination="onHandleCurrentChange"
                 @row-click="rowClick">
-                <template #id="{ scopes }">
+                <template #id="{ row }">
                     <div class="flex items-center">
-                        <i class="i-ic:baseline-format-list-bulleted drag-icon block" />{{ scopes.row.id }}
+                        <i class="i-ic:baseline-format-list-bulleted drag-icon block" />{{ row.id }}
                     </div>
                 </template>
                 <!-- <template #title="{ scopes }">
@@ -24,14 +24,14 @@
                         按钮
                     </el-tag>
                 </template> -->
-                <template #operate="{ scopes }">
-                    <el-button size="small" link type="primary" @click.stop="onOpenDialog('add', scopes.row)">
+                <template #operate="{ row }">
+                    <el-button size="small" link type="primary" @click.stop="onOpenDialog('add', row)">
                         新增
                     </el-button>
-                    <el-button size="small" link type="primary" @click.stop="onOpenDialog('edit', scopes.row)">
+                    <el-button size="small" link type="primary" @click.stop="onOpenDialog('edit', row)">
                         修改
                     </el-button>
-                    <!-- <el-button size="small" link type="primary" @click.stop="onDelete(scopes.row)">
+                    <!-- <el-button size="small" link type="primary" @click.stop="onDelete(row)">
                         删除
                     </el-button> -->
                 </template>
