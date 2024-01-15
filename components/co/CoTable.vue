@@ -85,20 +85,24 @@
 <script lang="ts" setup  generic="T">
 import { computed, reactive, ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import type { RenderRowData, TableColumnCtx, TableInstance, TableProps } from 'element-plus'
+import type { ComponentSize, RenderRowData, TableColumnCtx, TableInstance, TableProps } from 'element-plus'
 import { wait } from '@/utils/common'
 
 type CoTablePropsType = CoTableType<T>
 type TableHeaderType = CoTablePropsType['tableHeader'][0]
 
 // props数据类型结构，element-plus table props类型中的data重写
-interface PropsDataType extends Omit<TableProps<T>, 'data'> {
+// interface PropsDataType extends Omit<TableProps<T>, 'data'> {
+//     data: CoTableType<T>
+// }
+interface PropsDataType {
     data: CoTableType<T>
+    size?: ComponentSize
 }
 
 // 插槽数据类型结构
-type SlotsDataItemType = { default: any } & { [K in CoTableColumnPropertyHeader<T>]?: any } & {
-    [K in CoTableColumnProperty<T>]?: (props: RenderRowData<T>) => void;
+type SlotsDataItemType<U> = { default: any } & { [K in CoTableColumnPropertyHeader<U>]?: any } & {
+    [K in CoTableColumnProperty<U>]?: (props: RenderRowData<U>) => void;
 }
 
 const props = defineProps<PropsDataType>()
@@ -121,7 +125,7 @@ const emits = defineEmits<{
 //     [K in CoTableColumnProperty<T>]?: (props: CoTableColumnScopes) => void;
 // }>()
 
-defineSlots<SlotsDataItemType>()
+defineSlots<SlotsDataItemType<T>>()
 
 const { themeConfig } = useThemeState()
 
@@ -155,7 +159,7 @@ const headerList = computed({
     },
 })
 
-const size = ref(props.size || 'default')
+const size = ref(props?.size || 'default')
 
 // 默认数据列表
 const defData = reactive({
@@ -179,6 +183,9 @@ const smallSize = computed(() => {
 const attrs = useAttrs()
 const newAttrs = computed(() => {
     const { class: a, id, style, ...att } = attrs // eslint-disable-line unused-imports/no-unused-vars
+
+    // const { data, ...att } = props // eslint-disable-line unused-imports/no-unused-vars
+
     // if (att.style) delete att.style;
     // if (att.class) delete att.class;
     // if (att.id) delete att.id;
@@ -239,7 +246,7 @@ const onRefresh = async () => {
     defData.isRefresh = false
 }
 // 设置大小
-const onChangeSize = (val: typeof props.size) => {
+const onChangeSize = (val: ComponentSize) => {
     size.value = val || 'default'
 }
 
