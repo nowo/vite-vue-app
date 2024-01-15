@@ -1,5 +1,5 @@
 <template>
-    <el-form v-if="searchData.config.length" ref="formRef" v-bind="$attrs" :model="searchData.data">
+    <el-form v-if="searchData.config.length" ref="formRef" v-bind="props" :model="searchData.data">
         <el-form-item v-for="(item, index) in searchData.config.filter(item => !item.isHide)" :key="index" ref="formItemRef"
             :class="setFormItemClass(index)" v-bind="item.column" :prop="item.column.prop">
             <div class="item-content" :style="{ width: setElWidth(item.width) }">
@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup generic="T extends Record<string, any>">
-import type { FormInstance, FormItemInstance } from 'element-plus'
+import type { FormInstance, FormItemInstance, FormProps } from 'element-plus'
 
 // const props = defineProps({
 //     data: {
@@ -44,7 +44,7 @@ import type { FormInstance, FormItemInstance } from 'element-plus'
 //     },
 // })
 
-const props = defineProps<{
+const props = defineProps<Partial<FormProps> & {
     data: SearchDataType<T>
 }>()
 
