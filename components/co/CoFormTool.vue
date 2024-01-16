@@ -3,7 +3,7 @@
         <el-form-item v-for="(item, index) in searchData.config.filter(item => !item.isHide)" :key="index" ref="formItemRef"
             :class="setFormItemClass(index)" v-bind="item.column" :prop="item.column.prop">
             <div class="item-content" :style="{ width: setElWidth(item.width) }">
-                <slot v-if="item.slot" :name="item.column.prop" :row="searchData.data" />
+                <slot v-if="$slots[item.column.prop as any]" :name="item.column.prop" :row="searchData.data" />
                 <el-input v-else v-model.trim="searchData.data[item.column.prop]" :placeholder="item.placeholder" clearable
                     @keyup.enter="onSearch" />
             </div>

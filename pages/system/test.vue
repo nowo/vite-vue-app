@@ -1,26 +1,5 @@
 <template>
-    <CoTableDemo v-model:page="tableData.pagination" v-model:table-header="tableData.tableHeader" class="jm-box"
-        :data="tableData.data" auto-height @update:page="onHandleCurrentChange">
-        <template #company_idHeader>
-            111
-        </template>
-        <template #status="{ scopes }">
-            <el-tag v-if="scopes.row.status === 1" type="success">
-                启用
-            </el-tag>
-            <el-tag v-else type="info">
-                禁用
-            </el-tag>
-        </template>
-        <template #operate="{ scopes }">
-            <el-button size="small" link type="primary" @click="onOpenDialog('edit', scopes.row)">
-                修改
-            </el-button>
-            <el-button size="small" link type="primary" @click="onDel(scopes)">
-                删除
-            </el-button>
-        </template>
-    </CoTableDemo>
+    <div>测试页面</div>
 </template>
 
 <script lang="ts" setup>
@@ -64,9 +43,9 @@ const tableData = reactive<CoTableType<TableDataItem>>({
         { property: 'role_name', label: '关联角色', width: 130 },
         { property: 'company_name', label: '所属公司', minWidth: 130 },
         { property: 'phone', label: '手机号', width: 120 },
-        { property: 'last_login_time', label: '最后登录时间', width: 155, isHide: true },
-        { property: 'status', label: '员工状态', width: 85, align: 'center', slot: true, isHide: true },
-        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', slot: true, isHide: true },
+        { property: 'last_login_time', label: '最后登录时间', width: 155, other: { isHide: true } },
+        { property: 'status', label: '员工状态', width: 85, align: 'center', other: { isHide: true } },
+        { property: 'operate', label: '操作', width: 110, fixed: 'right', align: 'center', other: { isHide: true } },
     ],
     pagination: {
         page: 1, // 当前页面

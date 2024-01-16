@@ -96,7 +96,7 @@ type TableHeaderType = CoTablePropsType['tableHeader'][0]
 //     data: CoTableType<T>
 // }
 interface PropsDataType {
-    data: CoTableType<T>
+    option: CoTableType<T>
     size?: ComponentSize
 }
 
@@ -133,7 +133,7 @@ const tableRef = ref<TableInstance>()
 
 const propsData = computed({
     get: () => {
-        return props.data
+        return props.option
     },
     set: (val) => {
         emits('update:data', val)
@@ -143,7 +143,7 @@ const propsData = computed({
 const headerList = computed({
     get: () => {
         // 过滤隐藏项
-        const tableHeader = props.data.tableHeader.filter(item => !item?.other?.isHide).map((item) => {
+        const tableHeader = props.option.tableHeader.filter(item => !item?.other?.isHide).map((item) => {
             // 设置默认显示
             const other = item.other || {}
             other.isShow = item.other?.isShow === undefined ? true : item.other?.isShow
@@ -159,12 +159,13 @@ const headerList = computed({
     },
 })
 
+// table 尺寸
 const size = ref(props?.size || 'default')
 
 // 默认数据列表
 const defData = reactive({
     visible: false,
-    pagination: props.data.pagination,
+    pagination: props.option.pagination,
     time: 0, // 用于分页和分页数量同时改变时，更新数据判断
     isRefresh: false, // 是否正在刷新
     sizeList: { // table尺寸

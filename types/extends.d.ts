@@ -7,7 +7,7 @@ import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
-import type { FormItemProps, TableColumnCtx } from 'element-plus'
+import type { DatePickerProps, FormItemProps, IDatePickerType, InputNumberProps, InputProps, TableColumnCtx, cascaderProps } from 'element-plus'
 
 declare global {
     type ComponentInstance = {
@@ -20,8 +20,22 @@ declare global {
 
     type CoTableColumnCtx<T> = Partial<TableColumnCtx<T>>
 
-    type CoSearchDataColumnItem<T = string> = Partial<FormItemProps> & {
+    type CoSearchDataColumnItem<T = any> = Partial<FormItemProps> & {
         prop: keyof T
+    }
+
+    type CoSearchDataColumnValueType = {
+        type: 'text' // 文本框
+        props: Partial<InputProps>
+    } | {
+        type: 'number' // 数字输入框
+        props: Partial<InputNumberProps>
+    } | {
+        type: IDatePickerType
+        props: Partial<DatePickerProps>
+    } | {
+        type: 'cascader'
+        props: Partial<ExtractPropTypes<typeof cascaderProps>>
     }
 
 }
@@ -29,20 +43,20 @@ declare global {
 // 扩展 RouteMeta 接口
 declare module 'vue-router' {
     interface RouteMeta {
-        title?: string  // 页面标题、名称
+        title?: string // 页面标题、名称
 
-        isHide?: boolean    // 是否隐藏
-        isKeepAlive?: boolean   // 是否使用组件缓存
-        isAffix?: boolean   // 是否固定菜单
-        isLink?: boolean    // 是否使用外链
-        linkUrl?: string    // 外链地址
-        isIframe?: boolean  // 是否使用iframe嵌入
+        isHide?: boolean // 是否隐藏
+        isKeepAlive?: boolean // 是否使用组件缓存
+        isAffix?: boolean // 是否固定菜单
+        isLink?: boolean // 是否使用外链
+        linkUrl?: string // 外链地址
+        isIframe?: boolean // 是否使用iframe嵌入
         roles?: string[]
-        icon?: string   // 菜单图标
+        icon?: string // 菜单图标
 
         isDynamic?: boolean // 是否使用的动态路由
         isDynamicPath?: string // 动态路径
-        
+
         id?: number // 数据表对应id主键字段
     }
 }

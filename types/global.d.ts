@@ -21,13 +21,23 @@ interface ImportMetaEnv {
     VITE_APP_BASEURL: string
 }
 
+// CoSearchDataColumnValueType
+type CoSearchDataConfig<T> = {
+    column: CoSearchDataColumnItem<T>
+
+    // slot?: boolean
+    placeholder?: string
+    width?: string
+    isHide?: boolean
+} & CoSearchDataColumnValueType
+
 // search搜索项 数据格式公共类型
 declare interface SearchDataType<T = Record<string, any>> {
     data: T
     // config: {
     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
     // },
-    config: { column: CoSearchDataColumnItem<T>, slot?: boolean, placeholder?: string, width?: string, isHide?: boolean }[]
+    config: { column: CoSearchDataColumnItem<T>,  placeholder?: string, width?: string, isHide?: boolean }[]
     // searchFunc?: () => void,     // 查询方法
     hideBtn?: boolean
     showAll?: boolean
@@ -50,7 +60,7 @@ interface CoTableHeader<T> extends CoTableColumnCtx<T> {
 
 type CoTableColumnPropertyHeader<T> = `${keyof T}Header` | 'operateHeader'
 
-type CoTableColumnProperty<T> = CoTableHeader<T>['property'] 
+type CoTableColumnProperty<T> = CoTableHeader<T>['property']
 
 // table 数据格式公共类型
 declare interface CoTableType<T = object> {

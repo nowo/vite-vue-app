@@ -2,7 +2,7 @@
     <div>
         <VueDraggable v-model="tableData.data" class="h-80vh overflow-hidden" :animation="200"
             target=".el-table__body>tbody" handle=".drag-icon" group="g1" @end="onEnd">
-            <CoTable ref="listRef" v-model:data="tableData" class="table-box" :row-class-name="setRowClassName" row-key="id"
+            <CoTable ref="listRef" v-model:option="tableData" class="table-box" :row-class-name="setRowClassName" row-key="id"
                 :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @pagination="onHandleCurrentChange"
                 @row-click="rowClick">
                 <template #id="{ row }">

@@ -1,6 +1,6 @@
 <template>
     <div class="1overflow-hidden 1h-80vh">
-        <CoTable v-model:data="tableData" border @refresh="initTableData" @pagination="onHandleCurrentChange">
+        <CoTable v-model:option="tableData" border @refresh="initTableData" @pagination="onHandleCurrentChange">
             <!-- <div>
                 <el-button type="success">
                     新增

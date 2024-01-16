@@ -25,8 +25,8 @@
                     </ul>
                 </Pane>
                 <Pane ref="putRef" min-size="35" :size="75" class="relative">
-                    <CoTable ref="listRef" v-model:data="tableData" class="table-box" :row-class-name="setRowClassName"
-                        row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+                    <CoTable ref="listRef" v-model:option="tableData" class="table-box" :row-class-name="setRowClassName"
+                        row-key="id" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" border
                         @pagination="onHandleCurrentChange" @row-click="rowClick">
                         <template #id="{ row }">
                             <div class="flex items-center">
