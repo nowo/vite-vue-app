@@ -71,30 +71,33 @@ export const useTableScrollbarLoad = async (tableRef?: TableInstance) => {
 
     await wait(150)
     nextTick(() => {
-        // 获取y轴滚动距离
-        const vertical = tableRef.$el.querySelector('.el-scrollbar__bar.is-vertical')
-        // console.log(vertical)
-        // console.log(vertical.offsetHeight)
-        // console.log(vertical.clientHeight)
-        const y = vertical.querySelector('.el-scrollbar__thumb').style.transform
-        // console.log('y :>> ', y);
-        const translateY = getTranslateValue(y)
+        const scrollbarDom = tableRef.$el.querySelector('.el-table__body-wrapper>.el-scrollbar')
+        // console.log('scrollbarDom :>> ', scrollbarDom);
+        // console.log('scrollbarDom.children :>> ', scrollbarDom.children);
+        const vertical = Array.from(scrollbarDom.children as HTMLDivElement[]).find(item => item.className.includes('el-scrollbar__bar') && item.className.includes('is-vertical'))
+        const horizontal = Array.from(scrollbarDom.children as HTMLDivElement[]).find(item => item.className.includes('el-scrollbar__bar') && item.className.includes('is-horizontal'))
 
-        const numY = translateY ? vertical.offsetHeight * translateY : 0
+        // console.log('vertical :>> ', vertical);
+        // console.log('horizontal :>> ', horizontal);
+        if (!vertical || !horizontal) return
 
-        // 获取x轴滚动距离
-        const horizontal = tableRef.$el.querySelector('.el-scrollbar__bar.is-horizontal')
-        // console.log(horizontal)
-        // console.log('horizontal.offsetWidth :>> ', horizontal.offsetWidth)
-        const x = horizontal.querySelector('.el-scrollbar__thumb').style.transform
-        // console.log('x :>> ', x)
-        const translateX = getTranslateValue(x)
-        // console.log('translateX :>> ', translateX)
+        // console.log(vertical?.querySelector('.el-scrollbar__thumb'))
+        const y = vertical?.querySelector<HTMLDivElement>('.el-scrollbar__thumb')?.style?.transform
+        const translateY = getTranslateValue(y || '')
+        // * 0.01
+        // console.log(translateY)
+        const numY = translateY ? vertical?.offsetHeight / translateY : 0
+        // console.log(numY)
 
-        const numX = translateX ? horizontal.offsetWidth * translateX : 0
+        const x = horizontal?.querySelector<HTMLDivElement>('.el-scrollbar__thumb')?.style?.transform
+        // console.log('x :>> ', x);
+        const translateX = getTranslateValue(x || '')
+        // console.log('translateX :>> ', translateX);
+        // * 0.01
+        const numX = horizontal.offsetWidth * translateX
         // console.log({
         //     left: numX,
-        //     top: numY,
+        //     top: numY
         // })
         tableRef.scrollTo({
             left: numX,
