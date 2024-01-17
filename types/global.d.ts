@@ -37,7 +37,7 @@ declare interface SearchDataType<T = Record<string, any>> {
     // config: {
     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
     // },
-    config: { column: CoSearchDataColumnItem<T>,  placeholder?: string, width?: string, isHide?: boolean }[]
+    config: { column: CoSearchDataColumnItem<T>, placeholder?: string, width?: string, isHide?: boolean }[]
     // searchFunc?: () => void,     // 查询方法
     hideBtn?: boolean
     showAll?: boolean

@@ -113,12 +113,22 @@ const allData = Array.from({ length: 50 }).map((item) => {
 
 // 初始化表格数据
 const initTableData = async () => {
-    tableData.pagination.total = allData.length
+    console.log('111 :>> ', tableData.pagination)
+    // tableData.pagination.total = allData.length
 
-    const end = tableData.pagination.page * tableData.pagination.page_size
-    tableData.data = allData.slice(end - tableData.pagination.page_size, end)
+    // const end = tableData.pagination.page * tableData.pagination.page_size
+    // tableData.data = allData.slice(end - tableData.pagination.page_size, end)
 
-    // tableData.data = res.data.list
+    const { data } = await useFetch('/api/test', {
+        method: 'post',
+        body: {
+            page: tableData.pagination.page,
+            pageSize: tableData.pagination.page_size,
+        },
+    })
+    tableData.pagination.total = data.value?.total || 0
+
+    tableData.data = data.value!.list
     // tableData.pagination.total = res.data.total || 0
 }
 // 打开新增、修改
