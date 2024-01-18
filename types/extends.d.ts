@@ -7,7 +7,7 @@ import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
-import type { DatePickerProps, FormItemProps, IDatePickerType, InputNumberProps, InputProps, TableColumnCtx, cascaderProps } from 'element-plus'
+import type { CascaderProps, DatePickType, DatePickerProps, FormItemProps, InputNumberProps, InputProps, TableColumnCtx, TimePickerDefaultProps, cascaderProps } from 'element-plus'
 
 declare global {
     type ComponentInstance = {
@@ -28,15 +28,24 @@ declare global {
         type: 'text' // 文本框
         props: Partial<InputProps>
     } | {
-        type: 'number' // 数字输入框
-        props: Partial<InputNumberProps>
-    } | {
-        type: IDatePickerType
-        props: Partial<DatePickerProps>
-    } | {
-        type: 'cascader'
-        props: Partial<ExtractPropTypes<typeof cascaderProps>>
+        type: 1
     }
+    // | {
+    //     type: 'number' // 数字输入框
+    //     props: Partial<InputNumberProps>
+    // }
+    // | {
+    //     type: 'timePicker' //   时间选择器
+    //     props: Partial<TimePickerDefaultProps>
+    // }  | {
+    //     type: DatePickType // 日期选择器
+    //     props: Partial<DatePickerProps>
+    // } | {
+    //     type: 'cascader' // 级联选择器
+    //     // props: Partial<ExtractPropTypes<typeof cascaderProps>>
+    //     // props: Partial<CascaderProps> // TODO 此类型非组件类型
+    //     props: { props?: CascaderProps } & Record<string, any>
+    // }
 
 }
 

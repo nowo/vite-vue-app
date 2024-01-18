@@ -32,7 +32,7 @@ interface TableDataItem {
     'company_name': string // 所属公司名             北碚区丰庆仪器经营部
 
 }
-const tableData = reactive<CoTableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     tableHeader: [
         { property: 'id', label: 'id', width: 140 },

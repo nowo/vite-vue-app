@@ -31,3 +31,10 @@
         }
     }
 }
+
+
+.el-cascader-panel{
+    .el-cascader-node__postfix{ // 级联选择器展开箭头，样式层级不对情况
+        position: absolute;
+    }
+}

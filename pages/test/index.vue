@@ -73,7 +73,7 @@ interface TableDataItem {
     children?: TableDataItem[] //
 
 }
-const tableData = reactive<CoTableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     // config: {
     tableHeader: [

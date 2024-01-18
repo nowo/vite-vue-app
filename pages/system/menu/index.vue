@@ -101,7 +101,7 @@ const { isOverDropZone } = useDropZone(putRef, {
 interface FormSearchData {
     name: string
 }
-const searchData = reactive<SearchDataType<FormSearchData>>({
+const searchData = reactive<CoFormToolProps<FormSearchData>>({
     data: {
         name: '',
     },
@@ -129,7 +129,7 @@ interface TableDataItem {
     children?: TableDataItem[] //
 
 }
-const tableData = reactive<CoTableType<TableDataItem>>({
+const tableData = reactive<CoTableProps<TableDataItem>>({
     data: [],
     // config: {
     tableHeader: [

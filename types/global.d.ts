@@ -22,17 +22,34 @@ interface ImportMetaEnv {
 }
 
 // CoSearchDataColumnValueType
-type CoSearchDataConfig<T> = {
+type CoFormToolConfig<T> = {
     column: CoSearchDataColumnItem<T>
 
     // slot?: boolean
-    placeholder?: string
+    // placeholder?: string
     width?: string
     isHide?: boolean
-} & CoSearchDataColumnValueType
+} & Partial<CoSearchDataColumnValueType> 
+// & Partial<{
+//     type?: any
+//     props?: any
+// }>
+// & Partial<CoSearchDataColumnValueType>
 
 // search搜索项 数据格式公共类型
-declare interface SearchDataType<T = Record<string, any>> {
+// declare interface CoFormToolProps<T> {
+//     data: T
+//     // config: {
+//     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
+//     // },
+//     config: CoFormToolConfig<T>[]
+//     // searchFunc?: () => void,     // 查询方法
+//     hideBtn?: boolean
+//     showAll?: boolean
+// }
+
+// search搜索项 数据格式公共类型
+declare interface CoFormToolProps<T = Record<string, any>> {
     data: T
     // config: {
     //     [key in keyof T]: { label: string, slot?: boolean, placeholder: string, width: string }
@@ -63,7 +80,7 @@ type CoTableColumnPropertyHeader<T> = `${keyof T}Header` | 'operateHeader'
 type CoTableColumnProperty<T> = CoTableHeader<T>['property']
 
 // table 数据格式公共类型
-declare interface CoTableType<T = object> {
+declare interface CoTableProps<T> {
     data: T[]
     // tableHeader: ({
     //     property: CoTableColumnProperty<T>

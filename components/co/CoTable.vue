@@ -88,15 +88,15 @@ import { VueDraggable } from 'vue-draggable-plus'
 import type { ComponentSize, RenderRowData, TableColumnCtx, TableInstance, TableProps } from 'element-plus'
 import { wait } from '@/utils/common'
 
-type CoTablePropsType = CoTableType<T>
+type CoTablePropsType = CoTableProps<T>
 type TableHeaderType = CoTablePropsType['tableHeader'][0]
 
 // props数据类型结构，element-plus table props类型中的data重写
 // interface PropsDataType extends Omit<TableProps<T>, 'data'> {
-//     data: CoTableType<T>
+//     data: CoTableProps<T>
 // }
 interface PropsDataType {
-    option: CoTableType<T>
+    option: CoTableProps<T>
     size?: ComponentSize
 }
 
@@ -108,8 +108,8 @@ type SlotsDataItemType<U> = { default: any } & { [K in CoTableColumnPropertyHead
 const props = defineProps<PropsDataType>()
 // useUtils<T>
 const emits = defineEmits<{
-    (e: 'update:data', param: CoTableType<T>): void
-    (e: 'pagination', param: CoTableType<T>['pagination']): void
+    (e: 'update:data', param: CoTableProps<T>): void
+    (e: 'pagination', param: CoTableProps<T>['pagination']): void
     (e: 'refresh'): void // 刷新
 }>()
 
