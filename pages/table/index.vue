@@ -6,9 +6,10 @@
                     新增
                 </el-button>
             </div> -->
-            <!-- <template #nameHeader="a">
-                {{ test(a) }}
-            </template> -->
+            <template #nameHeader>
+                名称标题00
+                <!-- {{ test(a) }} -->
+            </template>
             <template #name="a">
                 {{ a.row.name }}
             </template>

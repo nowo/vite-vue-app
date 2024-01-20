@@ -1,6 +1,6 @@
 <template>
-    <div class="table-page">
-        <div v-if="$slots.default || propsData.isTool" class="mb8px flex items-end justify-between">
+    <div ref="tablePageRef" class="table-page">
+        <div v-if="$slots.default || propsData.isTool" ref="toolRef" class="flex items-end justify-between pb8px">
             <div>
                 <slot />
             </div>
@@ -33,35 +33,37 @@
                             <span class="i-ep-tools" title="列设置" />
                         </el-icon>
                     </template>
-                    <VueDraggable v-model="headerList" tag="ul" class="move-box" handle=".handle" :animation="260">
-                        <li v-for="(item, index) in headerList " :key="index"
-                            class="flex items-center justify-between px8px">
-                            <i class="handle i-ep-rank mr5px inline-block cursor-pointer" />
-                            <div class="flex-1 text-truncate">
-                                <el-checkbox v-model="item.other.isShow" :label="item.label" @change="onCheckBox" />
-                            </div>
-                            <div class="flex items-center pl5px">
-                                <div class="pin-icon mr5px" @click="onFixedItem('left', item)">
-                                    <i v-if="item.fixed === 'left'" class="pin-active i-mdi:pin rotate-30" />
-                                    <i v-else class="i-mdi:pin-outline rotate-30" />
+                    <el-scrollbar max-height="660">
+                        <VueDraggable v-model="headerList" tag="ul" class="move-box" handle=".handle" :animation="260">
+                            <li v-for="(item, index) in headerList " :key="index"
+                                class="flex items-center justify-between px8px">
+                                <i class="handle i-ep-rank mr5px inline-block cursor-pointer" />
+                                <div class="flex-1 text-truncate">
+                                    <el-checkbox v-model="item.other.isShow" :label="item.label" @change="onCheckBox" />
                                 </div>
-                                <div class="pin-icon" @click="onFixedItem('right', item)">
-                                    <i v-if="item.fixed === 'right'" class="pin-active i-mdi:pin -rotate-30" />
-                                    <i v-else class="i-mdi:pin-outline -rotate-30" />
+                                <div class="flex items-center pl5px">
+                                    <div class="pin-icon mr5px" @click="onFixedItem('left', item)">
+                                        <i v-if="item.fixed === 'left'" class="pin-active i-mdi:pin rotate-30" />
+                                        <i v-else class="i-mdi:pin-outline rotate-30" />
+                                    </div>
+                                    <div class="pin-icon" @click="onFixedItem('right', item)">
+                                        <i v-if="item.fixed === 'right'" class="pin-active i-mdi:pin -rotate-30" />
+                                        <i v-else class="i-mdi:pin-outline -rotate-30" />
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </VueDraggable>
+                            </li>
+                        </VueDraggable>
+                    </el-scrollbar>
                 </el-popover>
             </div>
         </div>
         <div class="flex-1 overflow-hidden">
-            <!--  :max-height="tableHeight" -->
-            <el-table ref="tableRef" :data="propsData.data" scrollbar-always-on highlight-current-row class="h100%!"
-                :size="size" v-bind="newAttrs">
+            <!-- class="h100%!" -->
+            <el-table ref="tableRef" :data="propsData.data" scrollbar-always-on highlight-current-row :size="size"
+                :max-height="tableHeight" v-bind="newAttrs">
                 <el-table-column v-for="(item, index) in headerList.filter(item => item.other.isShow) " :key="index"
                     show-overflow-tooltip v-bind="setColumnAttrs(item)">
-                    <template v-if="item.other?.slotHeader" #header>
+                    <template v-if="$slots[setSlotHeaderName(item)]" #header>
                         <slot :name="setSlotHeaderName(item)" />
                     </template>
                     <!-- 这里根据slot字段来判断是否使用插槽 -->
@@ -75,10 +77,10 @@
                 </el-table-column>
             </el-table>
         </div>
-        <el-pagination v-if="defData.pagination.total" v-model:current-page="defData.pagination.page"
+        <el-pagination v-if="defData.pagination.total" ref="pageRef" v-model:current-page="defData.pagination.page"
             v-model:page-size="defData.pagination.page_size" :small="smallSize" :page-sizes="defData.pagination.page_sizes"
             :total="defData.pagination.total" :pager-count="5" background layout="total, sizes, prev, pager, next, jumper"
-            class="mt15px" @size-change="onHandleSizeChange" @current-change="onHandleCurrentChange" />
+            class="pt15px" @size-change="onHandleSizeChange" @current-change="onHandleCurrentChange" />
     </div>
 </template>
 
@@ -130,6 +132,25 @@ defineSlots<SlotsDataItemType<T>>()
 const { themeConfig } = useThemeState()
 
 const tableRef = ref<TableInstance>()
+const tablePageRef = ref<HTMLDivElement>()
+const toolRef = ref<HTMLDivElement>()
+const pageRef = ref<ComponentInstance['ElPagination']>()
+const { height: tHeight } = useElementSize(tablePageRef)
+
+const tableHeight = computed(() => {
+    const node = tablePageRef.value?.parentElement
+    if (!node) return 'unset'
+    const cssModule = getComputedStyle(node) // 父级标签的样式
+    if (cssModule.overflow === 'hidden' || cssModule.overflowY === 'hidden') {
+        const toolHeight = toolRef.value?.clientHeight || 0 // table工具栏高度
+        const pageHeight = pageRef.value?.$el?.clientHeight || 0 // 分页高度
+        const hei = tHeight.value - toolHeight - pageHeight
+        // console.log('hei :>> ', hei)
+        return hei > 200 ? Math.floor(hei) : 200
+    } else {
+        return 'unset'
+    }
+})
 
 const propsData = computed({
     get: () => {

@@ -68,7 +68,7 @@ interface CoTableHeader<T> extends CoTableColumnCtx<T> {
     label: string
     other?: {
         // slot?: boolean
-        slotHeader?: boolean
+        // slotHeader?: boolean
         isHide?: boolean // 是否隐藏项
         isShow?: boolean // 是否显示字段
     }
