@@ -183,7 +183,7 @@ defineExpose({
 <style lang="scss" scoped>
 .hide-item {
     position: absolute;
-    left: 0;
+    left: -100%;
     visibility: hidden;
     z-index: -1000;
 }
