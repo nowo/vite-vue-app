@@ -7,7 +7,7 @@ import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
 import type { RouteRecordRaw } from 'vue-router'
-import type { CascaderProps, DatePickType, DatePickerProps, FormItemProps, InputNumberProps, InputProps, TableColumnCtx, TimePickerDefaultProps, cascaderProps } from 'element-plus'
+import type { FormItemProps, InputProps, TableColumnCtx } from 'element-plus'
 
 declare global {
     type ComponentInstance = {

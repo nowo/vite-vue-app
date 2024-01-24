@@ -43,11 +43,10 @@ const onToggleExpand = (item: RouteRecordRaw) => {
     defData.isExpand = defData.isExpand ? '' : item.path
 }
 
-const onEnd = (e:any) => {
-    console.log('e :>> ', e);
+const onEnd = (e: any) => {
+    console.log('e :>> ', e)
     emits('update:modelValue', list.value)
 }
-
 </script>
 
 <style lang="scss" scoped>

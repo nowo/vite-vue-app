@@ -9,8 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { ImageProps } from 'element-plus'
-
 // const props = defineProps<Partial<ImageProps> & {
 //     iconSize?: number
 // }>()

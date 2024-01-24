@@ -72,10 +72,7 @@
 <script lang="ts" setup>
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { VueDraggable } from 'vue-draggable-plus'
-import type { RouteRecordNormalized, RouteRecordRaw } from '#vue-router'
-
-import { deepClone } from '@/utils/common'
+import type { RouteRecordRaw } from '#vue-router'
 
 definePageMeta({
     title: '菜单页面',

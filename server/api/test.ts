@@ -1,6 +1,3 @@
-import { extname } from 'node:path'
-import type { H3Event, MultiPartData } from 'h3'
-
 export default eventHandler(async (event) => {
     const body = await readBody(event)
 

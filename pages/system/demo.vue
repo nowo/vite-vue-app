@@ -2,7 +2,7 @@
     <div>
         <CoFormTool :data="searchData" inline @search="onSearch" @reset="onSearch">
             <template #category_id="{ row }">
-                <el-select v-model="row.category_id" filterable placeholder="请选择" clearable>
+                <el-select v-model="row.category_id" placeholder="请选择" clearable filterable>
                     <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />
                 </el-select>
             </template>
@@ -46,8 +46,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { TimePickerDefaultProps } from 'element-plus'
-
 const defData = reactive({
     visible: false,
     typeList: [
@@ -123,7 +121,7 @@ interface FormSearchData {
 //         // supplier_id: '', // 供应商id
 //     },
 //     config: [
-//         // 
+//         //
 //         // { column: { label: '订货编号', prop: 'product_sn' }, type: 'text', props: { placeholder: '请输入订货编号' }, width: '120', isHide: true },
 //         { column: { label: '商品名称', prop: 'name' }, type: 'text', props: { placeholder: '请输入商品名称或型号' }, width: '200', isHide: true },
 //         { column: { label: '商品分类', prop: 'category_id' }, type: 'text', props: { placeholder: '请选择商品分类' }, width: '180' },

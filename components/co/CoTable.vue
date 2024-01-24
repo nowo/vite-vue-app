@@ -94,8 +94,8 @@
 
 <script lang="ts" setup  generic="T">
 import { computed, reactive, ref } from 'vue'
+import type { ComponentSize, RenderRowData, TableInstance } from 'element-plus'
 import { VueDraggable } from 'vue-draggable-plus'
-import type { ComponentSize, RenderRowData, TableColumnCtx, TableInstance, TableProps } from 'element-plus'
 import { wait } from '@/utils/common'
 
 type CoTablePropsType = CoTableProps<T>

@@ -29,7 +29,7 @@ type CoFormToolConfig<T> = {
     // placeholder?: string
     width?: string
     isHide?: boolean
-} & Partial<CoSearchDataColumnValueType> 
+} & Partial<CoSearchDataColumnValueType>
 // & Partial<{
 //     type?: any
 //     props?: any
