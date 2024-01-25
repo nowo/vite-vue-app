@@ -1,6 +1,5 @@
 declare module 'element-plus/dist/locale/zh-cn.mjs';
 declare module 'element-plus/dist/locale/en.mjs';
-declare module 'numbro/languages/zh-CN';
 declare module 'splitpanes';
 
 // declare module "@auth/core/types" {

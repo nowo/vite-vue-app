@@ -111,6 +111,9 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true, // or false to disable
     },
+    typescript: {
+        shim: false,
+    },
     // i18n: {
     //     // locale: 'cn',
     //     locales: [

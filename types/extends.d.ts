@@ -6,6 +6,8 @@ import type { PrismaClient } from '@prisma/client'
 import 'vue-router'
 
 import type { GlobalComponents } from '@vue/runtime-core'
+
+// import type { GlobalComponents } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import type { FormItemProps, InputProps, TableColumnCtx } from 'element-plus'
 

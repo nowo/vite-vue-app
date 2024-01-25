@@ -31,13 +31,13 @@
                     <!-- <el-icon class="tool-icon">
                     <span class="i-ep-download" title="导出" />
                 </el-icon> -->
-                    <el-popover :width="240" popper-class="popover-box" trigger="click">
+                    <el-popover :width="240" popper-class="p0!" trigger="click">
                         <template #reference>
                             <el-icon class="tool-icon">
                                 <span class="i-ep-tools" title="列设置" />
                             </el-icon>
                         </template>
-                        <el-scrollbar max-height="660">
+                        <el-scrollbar :max-height="tableHeight" wrap-class="p10px">
                             <VueDraggable v-model="headerList" tag="ul" class="move-box" handle=".handle" :animation="260">
                                 <li v-for="(item, index) in headerList " :key="index"
                                     class="flex items-center justify-between px8px">
@@ -107,7 +107,8 @@ type TableHeaderType = CoTablePropsType['tableHeader'][0]
 // }
 interface PropsDataType {
     option: CoTableProps<T>
-    size?: ComponentSize
+    size?: ComponentSize // 组件大小
+    autoHeight?: boolean // 表格设置自动高度(跟随内容)
 }
 
 // 插槽数据类型结构
@@ -118,7 +119,7 @@ type SlotsDataItemType<U> = { default: any } & { [K in CoTableColumnPropertyHead
 const props = defineProps<PropsDataType>()
 // useUtils<T>
 const emits = defineEmits<{
-    (e: 'update:data', param: CoTableProps<T>): void
+    (e: 'update:option', param: CoTableProps<T>): void
     (e: 'pagination', param: CoTableProps<T>['pagination']): void
     (e: 'refresh'): void // 刷新
 }>()
@@ -146,18 +147,12 @@ const pageRef = ref<ComponentInstance['ElPagination']>()
 const { height: tHeight } = useElementSize(tablePageRef)
 
 const tableHeight = computed(() => {
-    const node = tablePageRef.value?.parentElement
-    if (!node) return 'unset'
-    const cssModule = getComputedStyle(node) // 父级标签的样式
-    if (cssModule.overflow === 'hidden' || cssModule.overflowY === 'hidden') {
-        const toolHeight = toolRef.value?.clientHeight || 0 // table工具栏高度
-        const pageHeight = pageRef.value?.$el?.clientHeight || 0 // 分页高度
-        const hei = tHeight.value - toolHeight - pageHeight
-        // console.log('hei :>> ', hei)
-        return hei > 200 ? Math.floor(hei) : 200
-    } else {
-        return 'unset'
-    }
+    if (props.autoHeight) return 'unset'
+
+    const toolHeight = toolRef.value?.clientHeight || 0 // table工具栏高度
+    const pageHeight = pageRef.value?.$el?.clientHeight || 0 // 分页高度
+    const hei = tHeight.value - toolHeight - pageHeight
+    return hei > 200 ? Math.floor(hei) : 200
 })
 
 const propsData = computed({
@@ -165,7 +160,7 @@ const propsData = computed({
         return props.option
     },
     set: (val) => {
-        emits('update:data', val)
+        emits('update:option', val)
     },
 })
 // table表头配置
@@ -296,8 +291,9 @@ defineExpose({
     flex-direction: column;
     // min-height: 100%;
     height: 100%;
-    overflow: auto;
     border: 0;
+    position: relative;
+    z-index: 5;
 
     :deep(.el-table__header) {
         .sortable-chosen {
@@ -312,6 +308,10 @@ defineExpose({
     cursor: pointer;
     font-size: 16px;
     margin-left: 5px;
+
+    &:hover {
+        color: var(--el-color-primary-light-3);
+    }
 }
 
 .move-box {
@@ -341,4 +341,5 @@ defineExpose({
     }
 
 }
+
 </style>
