@@ -34,7 +34,7 @@ export const usePermissionState = () => {
     const getAuthMenu = async () => {
         const a = useUserState()
         if (!a.token.value) return []
-        const { data } = await useFetch('/api/route')
+        const { data } = await useFetch('/api/menu/auth')
         menuList.value = data.value || []
         return data
     }

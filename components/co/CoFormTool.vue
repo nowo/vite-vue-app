@@ -47,11 +47,11 @@ import type { FormInstance, FormItemInstance, FormProps } from 'element-plus'
 // })
 
 const props = defineProps<Partial<FormProps> & {
-    data: CoFormToolProps<T>
+    option: CoFormToolProps<T>
 }>()
 
 const emits = defineEmits<{
-    (event: 'update:data'): void
+    (event: 'update:option'): void
     (event: 'search'): void
     (event: 'reset'): void
 }>()
@@ -73,9 +73,9 @@ const defData = reactive({
 //     ...props.data
 // })
 const searchData = computed({
-    get: () => props.data,
+    get: () => props.option,
     set: (val) => {
-        emits('update:data')
+        emits('update:option')
         // props.data = val
     },
 })
@@ -121,7 +121,7 @@ const onReset = async () => {
 // 判断是否显示项
 const setHideItem = async (show: boolean, wid: number) => {
     // 不显示展开收起按钮时
-    if (props.data.hideBtn) return
+    if (props.option.hideBtn) return
     // 展开收起按钮为展开时
     if (show) return defData.hideIndex = -1
     // 还未获取到宽度时
@@ -131,7 +131,7 @@ const setHideItem = async (show: boolean, wid: number) => {
     const lastWidth = lastItemRef.value?.$el.getBoundingClientRect()
 
     const indexArr: number[] = []
-    props.data.config.reduce((prev, next, index) => {
+    props.option.config.reduce((prev, next, index) => {
         // const elBound = formItemRef.value[index].$el.getBoundingClientRect()
         // const count = prev + elBound.width
         let elWidth = 0
@@ -204,9 +204,5 @@ defineExpose({
 
         }
     }
-}
-
-.trans {
-    display: contents;
 }
 </style>

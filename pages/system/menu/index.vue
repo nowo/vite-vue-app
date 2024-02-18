@@ -1,6 +1,6 @@
 <template>
     <div class="h-80vh flex flex-col">
-        <CoFormTool :data="searchData" inline @search="onSearch" @reset="onReset">
+        <CoFormTool v-model:option="searchData" inline @search="onSearch" @reset="onReset">
             <el-button type="success" @click="onOpenDialog('add')">
                 <!-- <el-icon>
                     <ele-FolderAdd />
@@ -15,7 +15,7 @@
                     <ul class="w-100% flex flex-col gap-2 rounded bg-gray-500/5 p-4">
                         <li v-for="item in allRoutes" :key="item.path"
                             :class="filterPath.includes(item.path) ? 'no-drag' : ''" class="drag-item flex justify-between"
-                            draggable="true" @dragstart="onDragstart">
+                            draggable="true" @dragstart="onDragstart(item)">
                             <div class="flex-1 overflow-hidden">
                                 <b>{{ item.meta.title }}</b>
                                 <p>{{ item.path }}</p>
@@ -72,7 +72,7 @@
 <script lang="ts" setup>
 import { Pane, Splitpanes } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import type { RouteRecordRaw } from '#vue-router'
+import type { RouteRecordNormalized, RouteRecordRaw } from '#vue-router'
 
 definePageMeta({
     title: '菜单页面',
@@ -166,9 +166,11 @@ const filterRoutesPath = () => {
     return list
 }
 
+const dragItem = ref<RouteRecordNormalized>()
+const dragDom = ref<RouteRecordNormalized>()
 // 拖拽开始
-const onDragstart = () => {
-
+const onDragstart = (row: RouteRecordNormalized) => {
+    dragItem.value = row
 }
 
 function clone(element: RouteRecordRaw) {

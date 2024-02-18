@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    console.log('middleware')
+    // console.log('middleware')
     // setTimeout(() => {
     //     navigateTo(to)
     // },1000)

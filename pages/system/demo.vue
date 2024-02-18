@@ -1,6 +1,6 @@
 <template>
     <div>
-        <CoFormTool :data="searchData" inline @search="onSearch" @reset="onSearch">
+        <CoFormTool v-model:option="searchData" inline @search="onSearch" @reset="onSearch">
             <template #category_id="{ row }">
                 <el-select v-model="row.category_id" placeholder="请选择" clearable filterable>
                     <el-option v-for="item in defData.brandList" :key="item.id" :label="item.name" :value="item.id" />

@@ -24,6 +24,9 @@ export default defineNuxtConfig({
         '@unocss/reset/tailwind-compat.css',
         '~/assets/scss/index.scss',
     ],
+    typescript: {
+        shim: false,
+    },
     colorMode: {
         classSuffix: '',
     },
@@ -43,16 +46,16 @@ export default defineNuxtConfig({
         //     // https://nitro.unjs.io/guide/utils#experimental-composition-api
         //     asyncContext: true, // 设置defineEventHandler不用传递event -> defineEventHandler(()=>{}) 2.6版本以上才生效
         // },
-        // storage: {
-        //     // redis: {
-        //     //     driver: 'redis',
-        //     //     /* redis connector options */
-        //     // },
-        //     db: {
-        //         driver: 'fs',
-        //         base: './.data/db',
-        //     },
-        // },
+        storage: {
+            // redis: {
+            //     driver: 'redis',
+            //     /* redis connector options */
+            // },
+            db: {
+                driver: 'fs',
+                base: './.data/db',
+            },
+        },
     },
     app: {
         head: {
@@ -73,6 +76,23 @@ export default defineNuxtConfig({
 
     },
     // pwa,
+
+    runtimeConfig: {
+        // 仅在服务端serve可以访问
+        appKey: 'abcd',
+        upload: {
+            host: process.env.NUXT_UPLOAD_HOST || '',
+            dir: process.env.NUXT_UPLOAD_DIR || '',
+        },
+        jwt: {
+            secret: process.env.NUXT_JWT_SECRET || '',
+        },
+        // public里的在服务端serve,客户端client皆可访问
+        public: {
+            apiBase: process.env.VITE_API_BASE || '',
+            secret: process.env.NUXT_AUTH_SECRET, // You can generate one with `openssl rand -base64 32`
+        },
+    },
     vite: {
         plugins: [],
         // css: {
@@ -92,28 +112,40 @@ export default defineNuxtConfig({
             },
         },
     },
-    runtimeConfig: {
-        // 仅在服务端serve可以访问
-        appKey: 'abcd',
-        upload: {
-            host: process.env.NUXT_UPLOAD_HOST || '',
-            dir: process.env.NUXT_UPLOAD_DIR || '',
-        },
-        jwt: {
-            secret: process.env.NUXT_JWT_SECRET || '',
-        },
-        // public里的在服务端serve,客户端client皆可访问
-        public: {
-            apiBase: process.env.VITE_API_BASE || '',
-            secret: process.env.NUXT_AUTH_SECRET, // You can generate one with `openssl rand -base64 32`
-        },
-    },
     devtools: {
         enabled: true, // or false to disable
     },
-    typescript: {
-        shim: false,
-    },
+
+    // hooks: {
+    //     'pages:extend': async (pages)=> {
+    //         console.log('000',pages)
+
+    //     //             const { data } = await useFetch('/api/menu/auth')
+    //     // console.log('data :>> ', data.value)
+    //         // // 添加一个路由
+    //         // pages.push({
+    //         //     name: 'profile',
+    //         //     path: '/profile',
+    //         //     file: '~/extra-pages/profile.vue'
+    //         // })
+
+    //         // // 删除路由
+    //         // function removePagesMatching(pattern: RegExp, pages: NuxtPage[] = []) {
+    //         //     const pagesToRemove = []
+    //         //     for (const page of pages) {
+    //         //         if (pattern.test(page.file)) {
+    //         //             pagesToRemove.push(page)
+    //         //         } else {
+    //         //             removePagesMatching(pattern, page.children)
+    //         //         }
+    //         //     }
+    //         //     for (const page of pagesToRemove) {
+    //         //         pages.splice(pages.indexOf(page), 1)
+    //         //     }
+    //         // }
+    //         // removePagesMatching(/\.ts$/, pages)
+    //     }
+    // }
     // i18n: {
     //     // locale: 'cn',
     //     locales: [

@@ -23,6 +23,7 @@ export default eventHandler(async (event) => {
 
     const end = page * pageSize
     const list = allData.slice(end - pageSize, end)
+    // await useStorage().setItem('db:foo', { hello: 'world', page, pageSize })
 
     return { list, total: allData.length }
 })
