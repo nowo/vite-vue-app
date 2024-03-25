@@ -1,6 +1,6 @@
 <!-- 布局配置页面 -->
 <template>
-    <div>
+    <client-only>
         <el-drawer v-model="isDrawer" title="布局配置" direction="rtl" destroy-on-close size="260px" @close="onDrawerClose">
             <el-scrollbar class="px20px -mx20px">
                 <!-- 全局主题 -->
@@ -12,7 +12,8 @@
                         primary
                     </div>
                     <div>
-                        <el-color-picker v-model="getThemeConfig.primary" size="default" @change="onColorPickerChange" />
+                        <el-color-picker v-model="getThemeConfig.primary" size="default"
+                            @change="onColorPickerChange" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center">
@@ -128,7 +129,8 @@
                         </div>
                         <div>
                             <el-switch v-model="getThemeConfig.isColumnsMenuBarColorGradual" size="small"
-                                :disabled="getThemeConfig.layout !== 'columns'" @change="onColumnsMenuBarGradualChange" />
+                                :disabled="getThemeConfig.layout !== 'columns'"
+                                @change="onColumnsMenuBarGradualChange" />
                         </div>
                     </div>
                     <div class="mb5px min-h32px flex items-center">
@@ -137,7 +139,8 @@
                         </div>
                         <div>
                             <el-switch v-model="getThemeConfig.isColumnsMenuHoverPreload" size="small"
-                                :disabled="getThemeConfig.layout !== 'columns'" @change="onColumnsMenuHoverPreloadChange" />
+                                :disabled="getThemeConfig.layout !== 'columns'"
+                                @change="onColumnsMenuHoverPreloadChange" />
                         </div>
                     </div>
                     <div class="mb5px min-h32px flex items-center">
@@ -178,8 +181,9 @@
                         菜单水平折叠
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isCollapse" :disabled="getThemeConfig.layout === 'transverse'"
-                            size="small" @change="onThemeConfigChange" />
+                        <el-switch v-model="getThemeConfig.isCollapse"
+                            :disabled="getThemeConfig.layout === 'transverse'" size="small"
+                            @change="onThemeConfigChange" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center"
@@ -189,7 +193,8 @@
                     </div>
                     <div>
                         <el-switch v-model="getThemeConfig.isUniqueOpened"
-                            :disabled="getThemeConfig.layout === 'transverse'" size="small" @change="setLocalThemeConfig" />
+                            :disabled="getThemeConfig.layout === 'transverse'" size="small"
+                            @change="setLocalThemeConfig" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center">
@@ -197,7 +202,8 @@
                         固定 Header
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isFixedHeader" size="small" @change="onIsFixedHeaderChange" />
+                        <el-switch v-model="getThemeConfig.isFixedHeader" size="small"
+                            @change="onIsFixedHeaderChange" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center"
@@ -257,7 +263,8 @@
                         开启 Breadcrumb 图标
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isBreadcrumbIcon" size="small" @change="setLocalThemeConfig" />
+                        <el-switch v-model="getThemeConfig.isBreadcrumbIcon" size="small"
+                            @change="setLocalThemeConfig" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center">
@@ -281,7 +288,8 @@
                         开启 TagsView 缓存
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isCacheTagsView" size="small" @change="setLocalThemeConfig" />
+                        <el-switch v-model="getThemeConfig.isCacheTagsView" size="small"
+                            @change="setLocalThemeConfig" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center" :style="{ opacity: state.isMobile ? 0.5 : 1 }">
@@ -298,7 +306,8 @@
                         开启 TagsView 共用
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isShareTagsView" size="small" @change="onShareTagsViewChange" />
+                        <el-switch v-model="getThemeConfig.isShareTagsView" size="small"
+                            @change="onShareTagsViewChange" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center">
@@ -323,7 +332,8 @@
                         色弱模式
                     </div>
                     <div>
-                        <el-switch v-model="getThemeConfig.isInvert" size="small" @change="onAddFilterChange('invert')" />
+                        <el-switch v-model="getThemeConfig.isInvert" size="small"
+                            @change="onAddFilterChange('invert')" />
                     </div>
                 </div>
                 <div class="mb5px min-h32px flex items-center">
@@ -457,7 +467,7 @@
                 </div>
             </el-scrollbar>
         </el-drawer>
-    </div>
+    </client-only>
 </template>
 
 <script setup lang="ts">
