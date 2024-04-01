@@ -1,5 +1,5 @@
 // https://github.com/nuxt-modules/prismic/blob/master/src/module.ts
-import { createResolver, defineNuxtModule, extendPages } from '@nuxt/kit'
+import { defineNuxtModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
     setup(options, nuxt) {

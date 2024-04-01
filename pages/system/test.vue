@@ -18,18 +18,18 @@ const defData = reactive({
 })
 
 interface TableDataItem {
-    'id': number // 管理员ID            2
-    'account': string // 账户           admin
-    'password': string // 密码              c050817f677dffa315ca7fcc93086f1c
-    'phone': string // 手机号           15919477650
-    'name': string // 姓名              张三
-    'last_login_time': string // 最后登录时间       2022-06-11 02:03:52
-    'group_name': string // 最后登录IP         127.0.0.1
-    'role_id': number // 角色ID             1
-    'status': 0 | 1 // 状态 0禁用 1开启
-    'company_id': number // 所属公司ID          1
-    'role_name': string // 角色名称             超级管理员
-    'company_name': string // 所属公司名             北碚区丰庆仪器经营部
+    id: number // 管理员ID            2
+    account: string // 账户           admin
+    password: string // 密码              c050817f677dffa315ca7fcc93086f1c
+    phone: string // 手机号           15919477650
+    name: string // 姓名              张三
+    last_login_time: string // 最后登录时间       2022-06-11 02:03:52
+    group_name: string // 最后登录IP         127.0.0.1
+    role_id: number // 角色ID             1
+    status: 0 | 1 // 状态 0禁用 1开启
+    company_id: number // 所属公司ID          1
+    role_name: string // 角色名称             超级管理员
+    company_name: string // 所属公司名             北碚区丰庆仪器经营部
 
 }
 const tableData = reactive<CoTableProps<TableDataItem>>({

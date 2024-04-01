@@ -56,7 +56,7 @@ const emits = defineEmits<{
     (event: 'reset'): void
 }>()
 
-defineSlots<{ default(): any } & Record<keyof T, (props: { row: T }) => any>>()
+defineSlots<{ default: () => any } & Record<keyof T, (props: { row: T }) => any>>()
 
 const formRef = ref<FormInstance>()
 const formItemRef = ref<FormItemInstance[]>([])
