@@ -19,7 +19,7 @@ dependencies:
     version: 4.2.0
   element-plus:
     specifier: ^2.6.2
-    version: 2.6.2(vue@3.4.21)
+    version: 2.6.3(vue@3.4.21)
   fs-extra:
     specifier: ^11.2.0
     version: 11.2.0
@@ -51,7 +51,7 @@ devDependencies:
     version: 0.1.3(eslint@9.0.0)(typescript@5.4.4)
   '@element-plus/nuxt':
     specifier: ^1.0.8
-    version: 1.0.8(@element-plus/icons-vue@2.3.1)(element-plus@2.6.2)(rollup@3.29.4)
+    version: 1.0.8(@element-plus/icons-vue@2.3.1)(element-plus@2.6.3)(rollup@3.29.4)
   '@iconify-json/carbon':
     specifier: ^1.1.31
     version: 1.1.31
@@ -1888,7 +1888,7 @@ packages:
     dependencies:
       vue: 3.4.21(typescript@5.4.4)
 
-  /@element-plus/nuxt@1.0.8(@element-plus/icons-vue@2.3.1)(element-plus@2.6.2)(rollup@3.29.4):
+  /@element-plus/nuxt@1.0.8(@element-plus/icons-vue@2.3.1)(element-plus@2.6.3)(rollup@3.29.4):
     resolution: {integrity: sha512-A8CKdk0z1t9tiw2JowZGwYwSyZZoOBXFgedSqyeAO3wmp26ZqBzKir0/5BN54mXQ06VYZZRtq3cmkpNtJOKGQA==}
     peerDependencies:
       '@element-plus/icons-vue': '>=0.2.6'
@@ -1896,7 +1896,7 @@ packages:
     dependencies:
       '@element-plus/icons-vue': 2.3.1(vue@3.4.21)
       '@nuxt/kit': 3.11.1(rollup@3.29.4)
-      element-plus: 2.6.2(vue@3.4.21)
+      element-plus: 2.6.3(vue@3.4.21)
       magic-string: 0.27.0
       unplugin: 1.10.0
     transitivePeerDependencies:
@@ -2407,19 +2407,19 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
-  /@floating-ui/core@1.5.2:
-    resolution: {integrity: sha512-Ii3MrfY/GAIN3OhXNzpCKaLxHQfJF9qvwq/kEJYdqDxeIHa01K8sldugal6TmeeXl+WMvhv9cnVzUTaFFJF09A==}
+  /@floating-ui/core@1.6.0:
+    resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
     dependencies:
-      '@floating-ui/utils': 0.1.6
+      '@floating-ui/utils': 0.2.1
 
-  /@floating-ui/dom@1.5.3:
-    resolution: {integrity: sha512-ClAbQnEqJAKCJOEbbLo5IUlZHkNszqhuxS4fHAVxRPXPya6Ysf2G8KypnYcOTpx6I8xcgF9bbHb6g/2KpbV8qA==}
+  /@floating-ui/dom@1.6.3:
+    resolution: {integrity: sha512-RnDthu3mzPlQ31Ss/BTwQ1zjzIhr3lk1gZB1OC56h/1vEtaXkESrOqL5fQVMfXpwGtRwX+YsZBdyHtJMQnkArw==}
     dependencies:
-      '@floating-ui/core': 1.5.2
-      '@floating-ui/utils': 0.1.6
+      '@floating-ui/core': 1.6.0
+      '@floating-ui/utils': 0.2.1
 
-  /@floating-ui/utils@0.1.6:
-    resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
+  /@floating-ui/utils@0.2.1:
+    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
 
   /@humanwhocodes/config-array@0.12.3:
     resolution: {integrity: sha512-jsNnTBlMWuTpDkeE3on7+dWJi0D6fdDfeANj/w7MpS8ztROCoLvIO2nG0CcFj+E4k8j4QrSTh4Oryi3i2G669g==}
@@ -4292,10 +4292,10 @@ packages:
   /@types/lodash-es@4.17.12:
     resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
     dependencies:
-      '@types/lodash': 4.14.202
+      '@types/lodash': 4.17.0
 
-  /@types/lodash@4.14.202:
-    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
+  /@types/lodash@4.17.0:
+    resolution: {integrity: sha512-t7dhREVv6dbNj0q17X12j7yDG4bD/DHYX7o5/DbDxobP0HnGPgpRz2Ej77aL7TZT3DSw13fqUTj8J4mMnqa7WA==}
 
   /@types/mdast@3.0.15:
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
@@ -6987,16 +6987,16 @@ packages:
   /electron-to-chromium@1.4.710:
     resolution: {integrity: sha512-w+9yAVHoHhysCa+gln7AzbO9CdjFcL/wN/5dd+XW/Msl2d/4+WisEaCF1nty0xbAKaxdaJfgLB2296U7zZB7BA==}
 
-  /element-plus@2.6.2(vue@3.4.21):
-    resolution: {integrity: sha512-WFMv1v83l437Xu+GeeM+ytxd9VUQpR4418BowvTVIPYItsoj6yK0ITIuSv19iCesF405FbAOaCIHXhJch0ilFA==}
+  /element-plus@2.6.3(vue@3.4.21):
+    resolution: {integrity: sha512-U4L/mr+1r+EmAUYUHrs0V/8hHMdBGP07rPymSC72LZCN4jK1UwygQYICegTQ5us4mxeqBvW6wfoEfo003fwCqw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@element-plus/icons-vue': 2.3.1(vue@3.4.21)
-      '@floating-ui/dom': 1.5.3
+      '@floating-ui/dom': 1.6.3
       '@popperjs/core': /@sxzz/popperjs-es@2.11.7
-      '@types/lodash': 4.14.202
+      '@types/lodash': 4.17.0
       '@types/lodash-es': 4.17.12
       '@vueuse/core': 9.13.0(vue@3.4.21)
       async-validator: 4.2.5
