@@ -36,8 +36,8 @@ dependencies:
     specifier: ^3.1.5
     version: 3.1.5
   vue-draggable-plus:
-    specifier: ^0.3.5
-    version: 0.3.5(@types/sortablejs@1.15.8)
+    specifier: ^0.4.0
+    version: 0.4.0(@types/sortablejs@1.15.8)
   ws:
     specifier: ^8.16.0
     version: 8.16.0
@@ -8540,7 +8540,7 @@ packages:
     dependencies:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
-      minimatch: 9.0.3
+      minimatch: 9.0.4
       minipass: 7.0.4
       path-scurry: 1.10.1
     dev: true
@@ -14057,8 +14057,8 @@ packages:
     resolution: {integrity: sha512-RutnB7X8c5hjq39NceArgXg28WZtZpGc3+J16ljMiYnFhKvd8hITxSWQSQ5bvldxMDU6gG5mkxl1MTQLXckVSQ==}
     dev: true
 
-  /vue-draggable-plus@0.3.5(@types/sortablejs@1.15.8):
-    resolution: {integrity: sha512-HqIxV4Wr4U5LRPLRi2oV+EJ4g6ibyRKhuaiH4ZQo+LxK4zrk2XcBk9UyXC88OXp4SAq0XYH4Wco/T3LX5kJ79A==}
+  /vue-draggable-plus@0.4.0(@types/sortablejs@1.15.8):
+    resolution: {integrity: sha512-CcvSopMmSZY9McCdQ56QsAydT5cZilx9LzLU0UIz6KDYe9ll6QnmNHN80t6wnxN402ZECSXc5X1dm/myiMFi+A==}
     peerDependencies:
       '@types/sortablejs': ^1.15.0
       '@vue/composition-api': '*'
