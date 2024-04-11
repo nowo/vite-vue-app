@@ -63,7 +63,7 @@ devDependencies:
     version: 1.1.15
   '@nuxtjs/color-mode':
     specifier: ^3.3.3
-    version: 3.3.3(rollup@4.14.1)
+    version: 3.4.0(rollup@4.14.1)
   '@nuxtjs/i18n':
     specifier: ^8.2.0
     version: 8.3.0(rollup@4.14.1)(vue@3.4.21)
@@ -2736,11 +2736,13 @@ packages:
       - vue-tsc
     dev: true
 
-  /@nuxtjs/color-mode@3.3.3(rollup@4.14.1):
-    resolution: {integrity: sha512-t6QM/tj1d/53xQ9JznNVIaqIfQWhjHRzNt5VqTxNeAJWG0HCdiHVezkUTMahPUgUbEJnBrtCoquUYwpyFhNF+Q==}
+  /@nuxtjs/color-mode@3.4.0(rollup@4.14.1):
+    resolution: {integrity: sha512-rS51nG3zW8ksOwNubIP3BPQ+vBL0r2M6td1kkB/VaR1e1uVtNfWlBPfZjb604bgNCE2AeRNqaI0CrxkfnQ6h6Q==}
     dependencies:
-      '@nuxt/kit': 3.11.1(rollup@4.14.1)
+      '@nuxt/kit': 3.11.2(rollup@4.14.1)
       pathe: 1.1.2
+      pkg-types: 1.0.3
+      semver: 7.6.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -3602,12 +3604,19 @@ packages:
   /@types/eslint-scope@3.7.7:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.8
       '@types/estree': 1.0.5
     dev: true
 
   /@types/eslint@8.56.7:
     resolution: {integrity: sha512-SjDvI/x3zsZnOkYZ3lCt9lOZWZLB2jIlNKz+LBgCtDurK0JZcwucxYHn1w2BJkD34dgX9Tjnak0txtq4WTggEA==}
+    dependencies:
+      '@types/estree': 1.0.5
+      '@types/json-schema': 7.0.15
+    dev: true
+
+  /@types/eslint@8.56.8:
+    resolution: {integrity: sha512-LdDdQVDzDXf3ijhhMnE27C5vc0QEknD8GiMR/Hi+fVbdZNfAfCy2j69m0LjUd2MAy0+kIgnOtd5ndTmDk/VWCA==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
