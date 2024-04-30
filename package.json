@@ -15,7 +15,6 @@
         "start:generate": "pnpx serve .output/public",
         "prepare": "husky install",
         "commit": "git-cz",
-        "release": "release-it",
         "prisma-push": "pnpx prisma db push"
     },
     "dependencies": {
@@ -26,7 +25,6 @@
         "fs-extra": "^11.2.0",
         "jsonwebtoken": "^9.0.2",
         "nuxt-swiper": "^1.2.2",
-        "release-it": "^17.1.1",
         "splitpanes": "^3.1.5",
         "vue-draggable-plus": "^0.4.0",
         "ws": "^8.16.0"
@@ -50,7 +48,6 @@
         "@unocss/preset-rem-to-px": "^0.59.0",
         "@vite-pwa/nuxt": "^0.6.0",
         "@vueuse/nuxt": "^10.9.0",
-        "changelogen": "^0.5.5",
         "commitizen": "^4.3.0",
         "cz-git": "^1.9.0",
         "eslint": "^9.0.0",

@@ -1,6 +1,7 @@
 <template>
     <div>
-        <VueDraggable ref="dragRef" v-model="uploadList" tag="ul" class="upload-list" handle=".upload-list-chose-icon-drag">
+        <VueDraggable ref="dragRef" v-model="uploadList" tag="ul" class="upload-list"
+            handle=".upload-list-chose-icon-drag">
             <li v-for="(item, index) in uploadList" :key="item" class="upload-list-item">
                 <el-image :src="item" class="upload-list-item-image" />
                 <div class="upload-list-item-view">
@@ -15,7 +16,8 @@
                     <i class="upload-list-chose-icon i-ep-delete" @click="onImageRemove(index)" />
                 </div>
             </li>
-            <li v-if="props.limit > uploadList?.length" class="upload-list-item upload-list-chose" @click="openChoseDialog">
+            <li v-if="props.limit > uploadList?.length" class="upload-list-item upload-list-chose"
+                @click="openChoseDialog">
                 <i class="upload-list-chose-icon i-ep-plus" />
             </li>
         </VueDraggable>
@@ -72,9 +74,21 @@ const styles = computed(() => {
     return { margin }
 })
 
+const { files, open, reset,onChange } = useFileDialog({
+    multiple: true,
+    accept: 'image/*',
+})
+
+onChange((files) => {
+    if (files?.length) {
+        // TODO 调用图片上传方法
+
+    }
+})
+
 // 打开选择相册弹窗
 const openChoseDialog = () => {
-
+    open()
 }
 
 // 打开图片预览
